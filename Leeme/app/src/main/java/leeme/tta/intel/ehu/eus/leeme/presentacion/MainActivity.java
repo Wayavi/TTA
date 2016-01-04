@@ -1,4 +1,4 @@
-package leeme.tta.intel.ehu.eus.leeme;
+package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import leeme.tta.intel.ehu.eus.leeme.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Here comes the help", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

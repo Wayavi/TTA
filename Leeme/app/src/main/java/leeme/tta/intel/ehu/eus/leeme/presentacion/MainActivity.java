@@ -1,5 +1,6 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -50,5 +51,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /* Función encargada de regoger un click en el botón de comenzar, y arrancar la actividad MenuActivity */
+    public void showMenu(View view)
+    {
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
     }
 }

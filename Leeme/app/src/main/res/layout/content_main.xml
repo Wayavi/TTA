@@ -34,5 +34,6 @@
         android:text="@string/main_button_start"
         android:id="@+id/main_button_start"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11" />
+        android:layout_weight="0.11"
+        android:onClick="showMenu"/>
 </LinearLayout>

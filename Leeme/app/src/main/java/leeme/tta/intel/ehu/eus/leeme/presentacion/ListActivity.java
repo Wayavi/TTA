@@ -1,5 +1,6 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,25 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+//import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.CustomList;
 
 public class ListActivity extends AppCompatActivity {
 
     ListView list;
-    String[] web = {
+    String[] palabra = {
             "Google Plus",
             "Twitter",
             "Windows"
     } ;
-    Integer[] imageId = {
-            R.drawable.icon,
-            R.drawable.icon,
-            R.drawable.icon
+    Uri[] imageId = {
+            Uri.parse("http://51.254.127.111/Leeme/Tarta.jpg"),
+            Uri.parse("http://51.254.127.111/Leeme/Tarta.jpg"),
+            Uri.parse("http://51.254.127.111/Leeme/Tarta.jpg")
     };
 
     @Override
@@ -46,7 +46,7 @@ public class ListActivity extends AppCompatActivity {
 
         ListView lista = (ListView)findViewById(R.id.list_listview_lista);
 
-        /*
+        /* Esto sería válido para as frases en las que no hay imagenes, sólo texto
         //Generamos array de strings de prueba para poblr la ListView
         String[] codeLearnChapters = new String[] { "Android Introduction","Android Setup/Installation","Android Hello World",
                                                     "Android Layouts/Viewgroups","Android Activity & Lifecycle","Intents in Android"};
@@ -57,7 +57,7 @@ public class ListActivity extends AppCompatActivity {
         lista.setAdapter(codeLearnArrayAdapter);
         */
 
-        CustomList adapter = new CustomList(this, web, imageId);
+        CustomList adapter = new CustomList(this, palabra, imageId);
         list=(ListView)findViewById(R.id.list_listview_lista);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,7 +65,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Toast.makeText(ListActivity.this, "You Clicked at " + web[+position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListActivity.this, "You Clicked at " + palabra[+position], Toast.LENGTH_SHORT).show();
             }
         });
 

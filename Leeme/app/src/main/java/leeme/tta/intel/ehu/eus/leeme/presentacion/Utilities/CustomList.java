@@ -1,6 +1,7 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,15 @@ import leeme.tta.intel.ehu.eus.leeme.R;
 public class CustomList extends ArrayAdapter<String>{
 
     private final Activity context;
-    private final String[] web;
-    private final Integer[] imageId;
+    private final String[] palabra;
+    private final Uri[] imageUrl;
 
-    public CustomList(Activity context, String[] web, Integer[] imageId)
+    public CustomList(Activity context, String[] pal, Uri[] imgurl)
     {
-        super(context, R.layout.listitem, web);
+        super(context, R.layout.listitem, pal);
         this.context = context;
-        this.web = web;
-        this.imageId = imageId;
+        this.palabra = pal;
+        this.imageUrl = imgurl;
     }
 
     @Override
@@ -31,9 +32,10 @@ public class CustomList extends ArrayAdapter<String>{
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
-        txtTitle.setText(web[position]);
+        txtTitle.setText(palabra[position]);
 
-        imageView.setImageResource(imageId[position]);
+        //imageView.setImageResource(imageId[position]);
+        imageView.setImageURI(imageUrl[position]);
         return rowView;
     }
 }

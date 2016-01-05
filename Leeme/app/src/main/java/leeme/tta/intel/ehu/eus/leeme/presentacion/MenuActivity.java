@@ -1,5 +1,6 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,10 +10,14 @@ import android.view.Display;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
 
 public class MenuActivity extends AppCompatActivity {
+
+    private String menu;
+    private String subMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,9 @@ public class MenuActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        menu=null;
+        subMenu=null;
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,4 +43,16 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    public void showMenu2(View view)
+    {
+        if(menu==null)
+            menu=view.getResources().getResourceName(view.getId());
+        else
+            subMenu=view.getResources().getResourceName(view.getId());
+        Toast.makeText(this,menu,Toast.LENGTH_LONG).show();
+        /*Intent intent = new Intent(this, Menu2Activity.class);
+        intent.putExtra("EXTRA_MENU",1);
+        intent.putExtra("EXTRA_SUBMENU", 1);
+        startActivity(intent);*/
+    }
 }

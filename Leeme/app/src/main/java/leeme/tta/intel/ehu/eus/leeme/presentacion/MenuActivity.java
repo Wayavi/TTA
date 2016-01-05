@@ -27,14 +27,19 @@ public class MenuActivity extends AppCompatActivity {
         subMenu=null;
         display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 
-        if(savedInstanceState.getString("menu").contains("casa")) {
-            menu=savedInstanceState.getString("menu");
-            if (display.getRotation() == Surface.ROTATION_0)
-                setContentView(R.layout.activity_menucasa);
-            else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
-                setContentView(R.layout.activity_menucasa_horizontal);
+        if(savedInstanceState != null)
+        {
+            if(savedInstanceState.getString("menu") != null)
+            {
+                if(savedInstanceState.getString("menu").contains("casa")) {
+                    menu=savedInstanceState.getString("menu");
+                    if (display.getRotation() == Surface.ROTATION_0)
+                        setContentView(R.layout.activity_menucasa);
+                    else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
+                        setContentView(R.layout.activity_menucasa_horizontal);
+                }
+            }
         }
-
         else {
             if (display.getRotation() == Surface.ROTATION_0)
                 setContentView(R.layout.activity_menu);

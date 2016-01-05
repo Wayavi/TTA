@@ -11,24 +11,24 @@
     android:background="@drawable/fondo"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="leeme.tta.intel.ehu.eus.leeme.presentacion.MenuActivity"
-    tools:showIn="@layout/activity_menu">
+    tools:showIn="@layout/activity_menucasa">
 
 
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
-        android:id="@+id/menu_imagebutton_casa"
+        android:id="@+id/menu_imagebutton_baino"
         android:background="@drawable/casa"
-        android:layout_alignTop="@+id/menu_imagebutton_parque"
+        android:layout_alignTop="@+id/menu_imagebutton_salon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="showCasa"/>
+        android:onClick="showMenu2"/>
 
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
-        android:id="@+id/menu_imagebutton_parque"
-        android:background="@drawable/parque"
+        android:id="@+id/menu_imagebutton_salon"
+        android:background="@drawable/casa"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -38,9 +38,9 @@
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
-        android:id="@+id/menu_imagebutton_colegio"
-        android:background="@drawable/colegio"
-        android:layout_below="@+id/menu_imagebutton_casa"
+        android:id="@+id/menu_imagebutton_dormitorio"
+        android:background="@drawable/casa"
+        android:layout_below="@+id/menu_imagebutton_baino"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"
@@ -50,9 +50,9 @@
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
-        android:id="@+id/menu_imagebutton_chuches"
+        android:id="@+id/menu_imagebutton_cocina"
         android:background="@drawable/casa"
-        android:layout_alignTop="@+id/menu_imagebutton_colegio"
+        android:layout_alignTop="@+id/menu_imagebutton_dormitorio"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="showMenu2"/>

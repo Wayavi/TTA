@@ -61,10 +61,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /* Función encargada de regoger un click en el botón de comenzar, y arrancar la actividad MenuActivity */
+    /* Función encargada de recoger un click en el botón de comenzar, y arrancar la actividad MenuActivity */
     public void showMenu(View view)
     {
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
+
+    public void goList(View view)
+    {
+        Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
 }

@@ -21,7 +21,8 @@
         android:background="@drawable/casa"
         android:layout_alignTop="@+id/menu_imagebutton_parque"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="showMenu2"/>
 
     <ImageButton
         android:layout_width="125dp"
@@ -33,7 +34,8 @@
         android:layout_marginStart="23dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/menu_imagebutton_casa"
-        android:layout_toEndOf="@+id/menu_imagebutton_casa" />
+        android:layout_toEndOf="@+id/menu_imagebutton_casa"
+        android:onClick="showMenu2"/>
 
     <ImageButton
         android:layout_width="125dp"
@@ -43,7 +45,8 @@
         android:layout_marginLeft="20dp"
         android:layout_alignTop="@+id/menu_imagebutton_parque"
         android:layout_toLeftOf="@+id/menu_imagebutton_chuches"
-        android:layout_toStartOf="@+id/menu_imagebutton_chuches" />
+        android:layout_toStartOf="@+id/menu_imagebutton_chuches"
+        android:onClick="showMenu2"/>
 
 
     <ImageButton
@@ -54,6 +57,7 @@
         android:layout_marginLeft="20dp"
         android:layout_alignTop="@+id/menu_imagebutton_colegio"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="showMenu2"/>
 
 </RelativeLayout>

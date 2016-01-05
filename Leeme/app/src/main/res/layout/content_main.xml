@@ -36,4 +36,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.11"
         android:onClick="showMenu"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"
+        android:onClick="goList"/>
 </LinearLayout>

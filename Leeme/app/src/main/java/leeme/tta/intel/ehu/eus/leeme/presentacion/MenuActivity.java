@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
@@ -54,13 +55,13 @@ public class MenuActivity extends AppCompatActivity {
                     else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                         setContentView(R.layout.activity_menucasa_horizontal);
                 }
-            }
-            else if(savedInstanceState.getString("menu").contains("colegio")){
-                menu=savedInstanceState.getString("menu");
-                if (display.getRotation() == Surface.ROTATION_0)
-                    setContentView(R.layout.activity_menuescuela);
-                else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
-                    setContentView(R.layout.activity_menuescuela_horizontal);
+                else if(savedInstanceState.getString("menu").contains("colegio")){
+                    menu=savedInstanceState.getString("menu");
+                    if (display.getRotation() == Surface.ROTATION_0)
+                        setContentView(R.layout.activity_menuescuela);
+                    else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
+                        setContentView(R.layout.activity_menuescuela_horizontal);
+                }
             }
             else {
                 if (display.getRotation() == Surface.ROTATION_0)
@@ -112,8 +113,36 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         savedInstanceState.putString("menu",menu);
-        savedInstanceState.putString("subMenu",subMenu);
+        savedInstanceState.putString("subMenu", subMenu);
         super.onSaveInstanceState(savedInstanceState);
-
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    public void onBackPressed()
+    {
+        if(menu != "" && menu != null)
+        {
+            Intent intent = new Intent(this, MenuActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else
+        {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+    
 }

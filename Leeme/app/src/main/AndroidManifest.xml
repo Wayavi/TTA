@@ -21,6 +21,10 @@
         <activity
             android:name=".presentacion.MenuActivity"
             android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presentacion.Menu2Activity"
+            android:label="@string/title_activity_menu2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

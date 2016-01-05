@@ -6,5 +6,6 @@
     <!-- Strings para la main activity -->
     <string name="main_button_start">Comenzar</string>
     <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_menu2">Menu2Activity</string>
 
 </resources>

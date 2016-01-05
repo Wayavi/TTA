@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".presentacion.MainActivity"
+    tools:showIn="@layout/activity_main_horizontal"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:layout_width="175dp"
+        android:layout_height="130dp"
+        android:id="@+id/main_image_logo"
+        android:background="@drawable/icon"
+        android:layout_weight="0.11"
+        android:layout_marginTop="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="58dp"
+        android:layout_marginStart="58dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_image_leeme"
+        android:background="@drawable/leeme_sin"
+        android:layout_marginRight="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginTop="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_button_start"
+        android:id="@+id/main_button_start"
+        android:layout_weight="0.11"
+        android:onClick="showMenu"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_below="@+id/main_image_leeme"
+        android:layout_alignRight="@+id/main_image_leeme"
+        android:layout_alignEnd="@+id/main_image_leeme" />
+
+</RelativeLayout>

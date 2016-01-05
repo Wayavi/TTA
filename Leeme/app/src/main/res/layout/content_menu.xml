@@ -13,41 +13,44 @@
     tools:context="leeme.tta.intel.ehu.eus.leeme.presentacion.MenuActivity"
     tools:showIn="@layout/activity_menu">
 
+
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
-        android:id="@+id/menu_imagebutton_parque"
-        android:background="@drawable/parque"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentTop="true"
+        android:id="@+id/menu_imagebutton_casa"
+        android:background="@drawable/casa"
+        android:layout_alignTop="@+id/enu_imagebutton_parque"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
-        android:id="@+id/menu_imagebutton_casa"
-        android:layout_alignTop="@+id/menu_imagebutton_parque"
+        android:id="@+id/enu_imagebutton_parque"
+        android:background="@drawable/parque"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/casa"/>
+        android:layout_marginTop="30dp"/>
 
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
         android:id="@+id/menu_imagebutton_colegio"
         android:background="@drawable/colegio"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/menu_imagebutton_parque"
+        android:layout_below="@+id/menu_imagebutton_casa"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp" />
+
 
     <ImageButton
         android:layout_width="150dp"
         android:layout_height="170dp"
         android:id="@+id/menu_imagebutton_chuches"
+        android:background="@drawable/casa"
         android:layout_alignTop="@+id/menu_imagebutton_colegio"
-        android:layout_alignLeft="@+id/menu_imagebutton_casa"
-        android:layout_alignStart="@+id/menu_imagebutton_casa"
-        android:background="@drawable/chuches"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

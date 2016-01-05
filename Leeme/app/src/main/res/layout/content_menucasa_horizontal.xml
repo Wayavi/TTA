@@ -11,51 +11,50 @@
     android:background="@drawable/fondo"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="leeme.tta.intel.ehu.eus.leeme.presentacion.MenuActivity"
-    tools:showIn="@layout/activity_menu_horizontal">
+    tools:showIn="@layout/activity_menucasa_horizontal">
 
 
     <ImageButton
         android:layout_width="125dp"
         android:layout_height="150dp"
-        android:id="@+id/menu_imagebutton_casa"
+        android:id="@+id/menu_imagebutton_baino"
         android:background="@drawable/casa"
-        android:layout_alignTop="@+id/menu_imagebutton_parque"
+        android:layout_alignTop="@+id/menu_imagebutton_salon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="showCasa"/>
-
-    <ImageButton
-        android:layout_width="125dp"
-        android:layout_height="150dp"
-        android:id="@+id/menu_imagebutton_parque"
-        android:background="@drawable/parque"
-        android:layout_marginTop="31dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="23dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/menu_imagebutton_casa"
-        android:layout_toEndOf="@+id/menu_imagebutton_casa"
         android:onClick="showMenu2"/>
 
     <ImageButton
         android:layout_width="125dp"
         android:layout_height="150dp"
-        android:id="@+id/menu_imagebutton_colegio"
-        android:background="@drawable/colegio"
-        android:layout_marginLeft="20dp"
-        android:layout_alignTop="@+id/menu_imagebutton_parque"
-        android:layout_toLeftOf="@+id/menu_imagebutton_chuches"
-        android:layout_toStartOf="@+id/menu_imagebutton_chuches"
-        android:onClick="showMenu2"/>
-
-
-    <ImageButton
-        android:layout_width="125dp"
-        android:layout_height="150dp"
-        android:id="@+id/menu_imagebutton_chuches"
+        android:id="@+id/menu_imagebutton_salon"
         android:background="@drawable/casa"
-        android:layout_marginLeft="20dp"
-        android:layout_alignTop="@+id/menu_imagebutton_colegio"
+        android:layout_marginTop="26dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="22dp"
+        android:layout_toLeftOf="@+id/menu_imagebutton_dormitorio"
+        android:layout_toStartOf="@+id/menu_imagebutton_dormitorio"
+        android:onClick="showMenu2"/>
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:id="@+id/menu_imagebutton_dormitorio"
+        android:background="@drawable/casa"
+        android:layout_alignTop="@+id/menu_imagebutton_salon"
+        android:layout_toLeftOf="@+id/menu_imagebutton_cocina"
+        android:layout_toStartOf="@+id/menu_imagebutton_cocina"
+        android:layout_marginRight="22dp"
+        android:layout_marginEnd="22dp"
+        android:onClick="showMenu2"/>
+
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:id="@+id/menu_imagebutton_cocina"
+        android:background="@drawable/casa"
+        android:layout_alignTop="@+id/menu_imagebutton_dormitorio"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="showMenu2"/>

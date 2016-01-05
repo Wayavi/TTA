@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/fondo"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="leeme.tta.intel.ehu.eus.leeme.presentacion.MenuActivity"
+    tools:showIn="@layout/activity_menuescuela_horizontal">
+
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:id="@+id/menu_imagebutton_clase"
+        android:background="@drawable/colegio"
+        android:onClick="showMenu2"
+        android:layout_alignTop="@+id/menu_imagebutton_bilblioteca"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:id="@+id/menu_imagebutton_gimnasio"
+        android:background="@drawable/colegio"
+        android:onClick="showMenu2"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp"
+        android:layout_alignTop="@+id/menu_imagebutton_clase"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:id="@+id/menu_imagebutton_bilblioteca"
+        android:background="@drawable/colegio"
+        android:layout_marginTop="32dp"
+        android:onClick="showMenu2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="46dp"
+        android:layout_marginEnd="46dp" />
+
+
+</RelativeLayout>

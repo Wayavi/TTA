@@ -27,25 +27,7 @@ public class MenuActivity extends AppCompatActivity {
         subMenu=null;
         display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 
-        if(savedInstanceState != null)
-        {
-            if(savedInstanceState.getString("menu") != null)
-            {
-                if(savedInstanceState.getString("menu").contains("casa")) {
-                    menu=savedInstanceState.getString("menu");
-                    if (display.getRotation() == Surface.ROTATION_0)
-                        setContentView(R.layout.activity_menucasa);
-                    else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
-                        setContentView(R.layout.activity_menucasa_horizontal);
-                }
-            }
-        }
-        else {
-            if (display.getRotation() == Surface.ROTATION_0)
-                setContentView(R.layout.activity_menu);
-            else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
-                setContentView(R.layout.activity_menu_horizontal);
-        }
+        layoutCreate(savedInstanceState);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +42,41 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    private void layoutCreate(Bundle savedInstanceState){
+        if(savedInstanceState != null)
+        {
+            if(savedInstanceState.getString("menu") != null)
+            {
+                if(savedInstanceState.getString("menu").contains("casa")) {
+                    menu=savedInstanceState.getString("menu");
+                    if (display.getRotation() == Surface.ROTATION_0)
+                        setContentView(R.layout.activity_menucasa);
+                    else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
+                        setContentView(R.layout.activity_menucasa_horizontal);
+                }
+            }
+            else if(savedInstanceState.getString("menu").contains("colegio")){
+                menu=savedInstanceState.getString("menu");
+                if (display.getRotation() == Surface.ROTATION_0)
+                    setContentView(R.layout.activity_menuescuela);
+                else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
+                    setContentView(R.layout.activity_menuescuela_horizontal);
+            }
+            else {
+                if (display.getRotation() == Surface.ROTATION_0)
+                    setContentView(R.layout.activity_menu);
+                else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
+                    setContentView(R.layout.activity_menu_horizontal);
+            }
+        }
+        else {
+            if (display.getRotation() == Surface.ROTATION_0)
+                setContentView(R.layout.activity_menu);
+            else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
+                setContentView(R.layout.activity_menu_horizontal);
+        }
+    }
+
     public void showCasa(View view){
         menu=view.getResources().getResourceName(view.getId());
 
@@ -71,7 +88,11 @@ public class MenuActivity extends AppCompatActivity {
 
     public void showEscuela(View view){
         menu=view.getResources().getResourceName(view.getId());
-        setContentView(R.layout.activity_menu);
+
+        if(display.getRotation() == Surface.ROTATION_0)
+            setContentView(R.layout.activity_menuescuela);
+        else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
+            setContentView(R.layout.activity_menuescuela_horizontal);
     }
 
     public void showMenu2(View view)
@@ -80,8 +101,8 @@ public class MenuActivity extends AppCompatActivity {
             menu=view.getResources().getResourceName(view.getId());
         else
             subMenu=view.getResources().getResourceName(view.getId());
-        Toast.makeText(this,menu,Toast.LENGTH_LONG).show();
-        Toast.makeText(this,subMenu,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,menu,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,subMenu,Toast.LENGTH_SHORT).show();
         /*Intent intent = new Intent(this, Menu2Activity.class);
         intent.putExtra("EXTRA_MENU",menu);
         intent.putExtra("EXTRA_SUBMENU", subMenu);

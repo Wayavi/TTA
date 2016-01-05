@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@drawable/fondo"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="leeme.tta.intel.ehu.eus.leeme.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context=".presentacion.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:weightSum="1">
 
-    <TextView
+
+    <ImageView
+        android:layout_width="143dp"
+        android:layout_height="100dp"
+        android:id="@+id/main_image_logo"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/icon"
+        android:layout_weight="0.11" />
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView2" />
+        android:id="@+id/main_image_leeme"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/leeme_sin" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+        android:text="@string/main_button_start"
+        android:id="@+id/main_button_start"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11"
+        android:onClick="showMenu"/>
+</LinearLayout>

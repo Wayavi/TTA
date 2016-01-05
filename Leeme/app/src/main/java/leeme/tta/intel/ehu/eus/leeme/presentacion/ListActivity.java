@@ -11,6 +11,10 @@ import android.widget.AdapterView;
 //import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.net.URL;
+
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.CustomList;
 
@@ -22,11 +26,7 @@ public class ListActivity extends AppCompatActivity {
             "Twitter",
             "Windows"
     } ;
-    Uri[] imageId = {
-            Uri.parse("http://51.254.127.111/Leeme/Tarta.jpg"),
-            Uri.parse("http://51.254.127.111/Leeme/Tarta.jpg"),
-            Uri.parse("http://51.254.127.111/Leeme/Tarta.jpg")
-    };
+    URL[] imageId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +44,19 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        ListView lista = (ListView)findViewById(R.id.list_listview_lista);
+        try
+        {
+            imageId = new URL[3];
+            imageId[0] = new URL("http://51.254.127.111/Leeme/Tarta.jpg");
+            imageId[1] = new URL("http://51.254.127.111/Leeme/Tarta.jpg");
+            imageId[2] = new URL("http://51.254.127.111/Leeme/Tarta.jpg");
+
+        }
+        catch(IOException e){}
 
         /* Esto sería válido para as frases en las que no hay imagenes, sólo texto
         //Generamos array de strings de prueba para poblr la ListView
+        ListView lista = (ListView)findViewById(R.id.list_listview_lista);
         String[] codeLearnChapters = new String[] { "Android Introduction","Android Setup/Installation","Android Hello World",
                                                     "Android Layouts/Viewgroups","Android Activity & Lifecycle","Intents in Android"};
         //Creamos el adaptador para Arrays que hará el binding de el array al ListView
@@ -63,8 +72,7 @@ public class ListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(ListActivity.this, "You Clicked at " + palabra[+position], Toast.LENGTH_SHORT).show();
             }
         });

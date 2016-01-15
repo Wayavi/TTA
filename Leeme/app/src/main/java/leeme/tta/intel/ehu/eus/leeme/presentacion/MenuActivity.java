@@ -12,9 +12,13 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import leeme.tta.intel.ehu.eus.leeme.R;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -30,6 +34,7 @@ public class MenuActivity extends AppCompatActivity {
         display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 
         layoutCreate(savedInstanceState);
+        imageResize();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,6 +47,34 @@ public class MenuActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void imageResize()
+    {
+        try {
+            ImageResize resizeCasa = new ImageResize(getResources(),R.drawable.casa,500);
+            ImageResize resizeParque = new ImageResize(getResources(),R.drawable.parque,500);
+            ImageResize resizeChuches = new ImageResize(getResources(),R.drawable.chuches,500);
+            ImageResize resizeColegio = new ImageResize(getResources(),R.drawable.colegio,500);
+            ImageView casa = (ImageView)findViewById(R.id.menu_imagebutton_casa);
+            ImageView parque = (ImageView)findViewById(R.id.menu_imagebutton_parque);
+            ImageView chuches = (ImageView)findViewById(R.id.menu_imagebutton_chuches);
+            ImageView colegio = (ImageView)findViewById(R.id.menu_imagebutton_colegio);
+            casa.setImageBitmap(resizeCasa.getScaled());
+            parque.setImageBitmap(resizeParque.getScaled());
+            chuches.setImageBitmap(resizeChuches.getScaled());
+            colegio.setImageBitmap(resizeColegio.getScaled());
+            //casa.setBackgroundResource(R.drawable.casa);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void imageLoad()
+    {
+
     }
 
     private void layoutCreate(Bundle savedInstanceState){
@@ -145,5 +178,5 @@ public class MenuActivity extends AppCompatActivity {
             finish();
         }
     }
-    
+
 }

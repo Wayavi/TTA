@@ -14,9 +14,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_main_horizontal);
+
+        imageResize();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void imageResize()
+    {
+        /*ImageView logo = (ImageView)findViewById(R.id.main_image_logo);
+        logo.setImageBitmap(ImageResize.decodeSampledBitmapFromResource(getResources(),R.id.main_image_logo,10,10));
+        ImageView leeme = (ImageView)findViewById(R.id.main_image_leeme);
+        leeme.setImageBitmap(ImageResize.decodeSampledBitmapFromResource(getResources(),R.id.main_image_leeme,10,10));*/
     }
 
    /* @Override

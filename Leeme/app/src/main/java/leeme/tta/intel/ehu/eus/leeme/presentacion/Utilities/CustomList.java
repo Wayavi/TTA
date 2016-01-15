@@ -48,27 +48,13 @@ public class CustomList extends ArrayAdapter<String>{
 
         pos = position;
         //imageView.setImageResource(imageId[position]);
-        new Thread(new Runnable() {
-            @Override
-            public void run()
-            {
-                imageView.setImageBitmap(getBitmapFromURL(imageUrl[position]));
-            }
-        }).start();
+
         return rowView;
     }
 
-    public static Bitmap getBitmapFromURL(URL url) {
-        try {
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
+
+
+
+
 }

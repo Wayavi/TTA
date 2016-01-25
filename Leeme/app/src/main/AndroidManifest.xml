@@ -40,6 +40,10 @@
         <activity
             android:name=".presentacion.LearnActivity"
             android:label="@string/title_activity_learn"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".presentacion.TestActivity"
+            android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

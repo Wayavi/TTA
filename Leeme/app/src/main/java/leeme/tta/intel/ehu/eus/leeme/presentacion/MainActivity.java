@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 
@@ -49,10 +51,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void imageResize()
     {
-        /*ImageView logo = (ImageView)findViewById(R.id.main_image_logo);
-        logo.setImageBitmap(ImageResize.decodeSampledBitmapFromResource(getResources(),R.id.main_image_logo,10,10));
-        ImageView leeme = (ImageView)findViewById(R.id.main_image_leeme);
-        leeme.setImageBitmap(ImageResize.decodeSampledBitmapFromResource(getResources(),R.id.main_image_leeme,10,10));*/
+        try {
+            ImageResize resizeLogo= new ImageResize(getResources(),R.drawable.icon,400);
+            ImageResize resizeLeeme = new ImageResize(getResources(),R.drawable.leeme_sin,400);
+            //ImageResize resizeChuches = new ImageResize(getResources(),R.drawable.chuches,400);
+            ImageView logo = (ImageView)findViewById(R.id.main_image_logo);
+            ImageView leeme = (ImageView)findViewById(R.id.main_image_leeme);
+            //ImageView chuches = (ImageView)findViewById(R.id.menu_imagebutton_chuches);
+            logo.setImageBitmap(resizeLogo.getScaled());
+            leeme.setImageBitmap(resizeLeeme.getScaled());
+            // chuches.setImageBitmap(resizeChuches.getScaled());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
    /* @Override

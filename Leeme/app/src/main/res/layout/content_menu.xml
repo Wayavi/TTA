@@ -23,7 +23,8 @@
         android:layout_alignTop="@+id/menu_imagebutton_parque"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="showCasa"/>
+        android:onClick="showCasa"
+        tools:targetApi="16"/>
 
     <ImageButton
         android:layout_width="150dp"

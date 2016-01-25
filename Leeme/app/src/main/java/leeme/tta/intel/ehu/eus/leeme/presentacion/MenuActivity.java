@@ -1,6 +1,7 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,7 @@ import java.io.IOException;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Resizeable;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -52,28 +54,22 @@ public class MenuActivity extends AppCompatActivity {
     public void imageResize()
     {
         try {
-            ImageResize resizeCasa = new ImageResize(getResources(),R.drawable.casa,500);
-            ImageResize resizeParque = new ImageResize(getResources(),R.drawable.parque,500);
-            ImageResize resizeChuches = new ImageResize(getResources(),R.drawable.chuches,500);
-            ImageResize resizeColegio = new ImageResize(getResources(),R.drawable.colegio,500);
+            ImageResize resizeCasa = new ImageResize(getResources(),R.drawable.casa,450);
+            ImageResize resizeParque = new ImageResize(getResources(),R.drawable.parque,450);
+            ImageResize resizeChuches = new ImageResize(getResources(),R.drawable.chuches,450);
+            ImageResize resizeColegio = new ImageResize(getResources(),R.drawable.colegio,450);
             ImageView casa = (ImageView)findViewById(R.id.menu_imagebutton_casa);
             ImageView parque = (ImageView)findViewById(R.id.menu_imagebutton_parque);
             ImageView chuches = (ImageView)findViewById(R.id.menu_imagebutton_chuches);
             ImageView colegio = (ImageView)findViewById(R.id.menu_imagebutton_colegio);
-            casa.setImageBitmap(resizeCasa.getScaled());
+            //casa.setImageBitmap(resizeCasa.getScaled());
+            casa.setBackground(new BitmapDrawable(getResources(),resizeCasa.getScaled()));
             parque.setImageBitmap(resizeParque.getScaled());
             chuches.setImageBitmap(resizeChuches.getScaled());
             colegio.setImageBitmap(resizeColegio.getScaled());
-            //casa.setBackgroundResource(R.drawable.casa);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-    }
-
-    public void imageLoad()
-    {
 
     }
 

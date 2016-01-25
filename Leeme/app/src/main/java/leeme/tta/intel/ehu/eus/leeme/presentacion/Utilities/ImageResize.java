@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
@@ -28,25 +29,29 @@ public class ImageResize
 
     private Bitmap scaled;
 
-    public ImageResize(Resources resources, int resId, int newWidth)
+    public ImageResize(Resources resources, int resId, int newHeight)
             throws IOException {
-        Size size = getRoughSize(resources, resId, newWidth);
+        Size size = getRoughSize(resources, resId, newHeight);
         roughScaleImage(resources, resId, size);
-        scaleImage(newWidth);
+        scaleImage(newHeight);
     }
 
     public Bitmap getScaled() {
         return scaled;
     }
 
-    private void scaleImage(int newWidth) {
+    public BitmapDrawable getScaledBackground() {
+        return new BitmapDrawable(scaled);
+    }
+
+    private void scaleImage(int newHeight) {
         int width = scaled.getWidth();
         int height = scaled.getHeight();
 
-        float scaleWidth = ((float) newWidth) / width;
-        float ratio = ((float) scaled.getWidth()) / newWidth;
-        int newHeight = (int) (height / ratio);
         float scaleHeight = ((float) newHeight) / height;
+        float ratio = ((float) scaled.getHeight()) / newHeight;
+        int newWidth = (int) (width / ratio);
+        float scaleWidth = ((float) newWidth) / width;
 
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
@@ -63,24 +68,24 @@ public class ImageResize
         scaled = BitmapFactory.decodeResource(resources, resId, scaledOpts);
     }
 
-    private Size getRoughSize(Resources resources, int resId, int newWidth) {
+    private Size getRoughSize(Resources resources, int resId, int newHeight) {
         BitmapFactory.Options o = new BitmapFactory.Options();
         o.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(resources, resId, o);
 
-        Size size = getRoughSize(o.outWidth, o.outHeight, newWidth);
+        Size size = getRoughSize(o.outWidth, o.outHeight, newHeight);
         return size;
     }
 
-    private Size getRoughSize(int outWidth, int outHeight, int newWidth) {
+    private Size getRoughSize(int outWidth, int outHeight, int newHeight) {
         Size size = new Size();
-        size.scale = outWidth / newWidth;
+        size.scale = outHeight / newHeight;
         size.sample = 1;
 
         int width = outWidth;
         int height = outHeight;
 
-        int newHeight = (int) (outHeight / size.scale);
+        int newWidth = (int) (outWidth / size.scale);
 
         while (true) {
             if (width / 2 < newWidth || height / 2 < newHeight) {

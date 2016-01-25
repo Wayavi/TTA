@@ -18,15 +18,13 @@
         android:id="@+id/main_image_logo"
         android:layout_marginTop="40dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/icon"
         android:layout_weight="0.11" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/main_image_leeme"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/leeme_sin" />
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"

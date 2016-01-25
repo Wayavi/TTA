@@ -9,5 +9,6 @@
     <string name="title_activity_menu2">Menu2Activity</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_learn">LearnActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>

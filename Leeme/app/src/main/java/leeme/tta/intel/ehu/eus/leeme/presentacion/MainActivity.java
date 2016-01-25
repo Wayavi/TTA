@@ -84,9 +84,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Función para ir a la lista de palabras (sólo para testeo)
     public void goList(View view)
     {
         Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
+    public void goTest(View view)
+    {
+        Intent intent = new Intent(this, TestActivity.class);
         startActivity(intent);
     }
 

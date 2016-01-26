@@ -1,13 +1,15 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,17 +20,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import leeme.tta.intel.ehu.eus.leeme.R;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity{
 
     private final String SERVER_URL = "http://51.254.127.111/Leeme";
     private final String QUERY_VOCABULARIO = "vocabularioPorCategoria.php";
@@ -37,11 +37,14 @@ public class TestActivity extends AppCompatActivity {
     private VideoView video;
     private EditText respuesta;
     private Button btnSiguiente, btnCorregir;
-    private TextView respCorrecta;
+    private TextView testHeader, respCorrecta;
     private ImageView imgRespuesta;
+    private LinearLayout layoutTest;
 
     private int index;
-    private int testCont = 6;
+    private int testCont = 0;
+    private int numCorrectas = 0;
+    private int numIncorrectas = 0;
     private String listaPalabras[];
     private String hitzZerrenda[];
     private String urlVideos[];
@@ -63,27 +66,10 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
-
         //Custom code
         Intent intent = getIntent();
-        //En la implementación real de aqui se sacaría la categoría/subcategoría, de momento la ponemos a pelo
-        video = (VideoView)findViewById(R.id.test_videoview_video);
-        btnSiguiente = (Button)findViewById(R.id.test_button_siguiente);
-        respCorrecta = (TextView)findViewById(R.id.test_textview_respcorrecta);
-        btnCorregir = (Button)findViewById(R.id.test_button_corregir);
-        imgRespuesta = (ImageView)findViewById(R.id.test_imageview_imgrespuesta);
-        final MediaController controller = new MediaController(TestActivity.this){
-            @Override
-            public boolean dispatchKeyEvent(KeyEvent event)
-            {
-                if(event.getKeyCode() == KeyEvent.KEYCODE_BACK)
-                    finish();
-                return super.dispatchKeyEvent(event);
-            }
-        };
-        controller.setAnchorView(video);
-        video.setMediaController(controller);
-        respuesta = (EditText)findViewById(R.id.test_edittext_respuesta);
+        //Se deberia coger la categoria y subcategoria
+        layoutTest = (LinearLayout)findViewById(R.id.test_linearlayout_test);
     }
 
     public void seleccionarTipo(View view)
@@ -92,43 +78,97 @@ public class TestActivity extends AppCompatActivity {
         int selectedId = grupo.getCheckedRadioButtonId();
         View buttonView = findViewById(selectedId);
         index = grupo.indexOfChild(buttonView);
+
+        //Creamos el contenido
+        testHeader = new TextView(this);
+        int i = testCont + 1;
+        testHeader.setText(i + "º Test");
+        testHeader.setTextSize(16);
+        testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
+        layoutTest.addView(testHeader);
+        video = new VideoView(this);
+        MediaController controller = new MediaController(this);
+        video.setMediaController(controller);
+        layoutTest.addView(video);
+        respuesta = new EditText(this);
+        layoutTest.addView(respuesta);
+        btnCorregir = new Button(this);
+        btnCorregir.setText("Corregir");
+        btnCorregir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                corregirTest(v);
+            }
+        });
+        layoutTest.addView(btnCorregir);
         loadContent();
 
     }
 
     public void corregirTest(View view)
     {
-        //Se ocultan los elementos
-        video.setVisibility(View.INVISIBLE);
-        respuesta.setVisibility(View.INVISIBLE);
-        btnCorregir.setVisibility(View.INVISIBLE);
-
         String resp = respuesta.getText().toString();
+        layoutTest.removeAllViews();
+        imgRespuesta = new ImageView(this);
+        btnSiguiente = new Button(this);
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                siguienteTest(v);
+            }
+        });
         //TODO: falta escoger el array correcto de resultados en base al idioma
         if(resp.equalsIgnoreCase(listaPalabras[testCont]))
         {
             //Respuesta correcta
+            numCorrectas++;
             Toast.makeText(this, "¡Correcto!", Toast.LENGTH_SHORT).show();
-            //imgRespuesta.setImageResource(R.drawable.bien_transparente);
-            btnSiguiente.setVisibility(View.VISIBLE);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.bien_transparente);
+            imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
+            layoutTest.addView(imgRespuesta);
+            layoutTest.addView(btnSiguiente);
+            bm.recycle();
         }
         else
         {
             //Respuesta incorrecta
+            numIncorrectas++;
             Toast.makeText(this, "¡Incorrecto!", Toast.LENGTH_SHORT).show();
-            //imgRespuesta.setImageResource(R.drawable.mal_transparente);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.mal_transparente);
+            imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
+            bm.recycle();
+            respCorrecta = new TextView(this);
             respCorrecta.setText("La respuesta correcta era: " + listaPalabras[testCont]);
-            respCorrecta.setVisibility(View.VISIBLE);
-            btnSiguiente.setVisibility(View.VISIBLE);
+            layoutTest.addView(imgRespuesta);
+            layoutTest.addView(respCorrecta);
+            layoutTest.addView(btnSiguiente);
         }
         testCont++;
     }
 
     public void siguienteTest(View view)
     {
-        imgRespuesta.setVisibility(View.INVISIBLE);
-        respCorrecta.setVisibility(View.INVISIBLE);
-        btnSiguiente.setVisibility(View.INVISIBLE);
+        layoutTest.removeAllViews();
+        testHeader = new TextView(this);
+        int i = testCont + 1;
+        testHeader.setText(i + "º Test");
+        video = new VideoView(this);
+        MediaController controller = new MediaController(this);
+        video.setMediaController(controller);
+        layoutTest.addView(video);
+        respuesta = new EditText(this);
+        layoutTest.addView(respuesta);
+        btnCorregir = new Button(this);
+        btnCorregir.setText("Corregir");
+        btnCorregir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                corregirTest(v);
+            }
+        });
+        layoutTest.addView(btnCorregir);
+
         if(index == 0)
         {
             video.setVideoURI(Uri.parse(SERVER_URL + urlVideos[testCont]));
@@ -209,7 +249,6 @@ public class TestActivity extends AppCompatActivity {
                             else
                             {
                                 video.setVideoURI(Uri.parse(SERVER_URL + '/' + urlVideos[testCont]));
-
                             }
                         }
                     });

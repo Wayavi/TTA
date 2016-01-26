@@ -12,13 +12,14 @@
     tools:context="leeme.tta.intel.ehu.eus.leeme.presentacion.TestActivity"
     tools:showIn="@layout/activity_test"
     android:orientation="vertical"
-    android:id="@+id/test_linearlayout">
+    android:id="@+id/test_linearlayout"
+    android:background="@drawable/fondo">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/test_linearlayout_escoger"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,46 +64,6 @@
         android:orientation="vertical"
         android:visibility="invisible">
 
-        <VideoView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/test_videoview_video"
-            android:layout_gravity="center_horizontal" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/test_imageview_imgrespuesta"
-            android:layout_gravity="center_horizontal"
-            android:visibility="invisible" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/test_edittext_respuesta"
-            android:layout_gravity="center_horizontal" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Corregir"
-            android:id="@+id/test_button_corregir"
-            android:layout_gravity="center_horizontal"
-            android:onClick="corregirTest"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/test_textview_respcorrecta"
-            android:visibility="invisible"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Siguiente"
-            android:id="@+id/test_button_siguiente"
-            android:onClick="siguienteTest"
-            android:visibility="invisible"/>
 
     </LinearLayout>
 

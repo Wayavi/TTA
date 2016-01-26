@@ -82,7 +82,7 @@ public class TestActivity extends AppCompatActivity{
         //Creamos el contenido
         testHeader = new TextView(this);
         int i = testCont + 1;
-        testHeader.setText(i + "º Test");
+        testHeader.setText(i + R.string.test_text_numtest);
         testHeader.setTextSize(16);
         testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
         layoutTest.addView(testHeader);
@@ -93,7 +93,7 @@ public class TestActivity extends AppCompatActivity{
         respuesta = new EditText(this);
         layoutTest.addView(respuesta);
         btnCorregir = new Button(this);
-        btnCorregir.setText("Corregir");
+        btnCorregir.setText(R.string.test_text_botoncorregir);
         btnCorregir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +111,7 @@ public class TestActivity extends AppCompatActivity{
         layoutTest.removeAllViews();
         imgRespuesta = new ImageView(this);
         btnSiguiente = new Button(this);
-        btnSiguiente.setText("Siguiente");
+        btnSiguiente.setText(R.string.test_text_botonsiguiente);
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +123,7 @@ public class TestActivity extends AppCompatActivity{
         {
             //Respuesta correcta
             numCorrectas++;
-            Toast.makeText(this, "¡Correcto!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.test_text_correcto, Toast.LENGTH_SHORT).show();
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.bien_transparente);
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
             layoutTest.addView(imgRespuesta);
@@ -134,12 +134,12 @@ public class TestActivity extends AppCompatActivity{
         {
             //Respuesta incorrecta
             numIncorrectas++;
-            Toast.makeText(this, "¡Incorrecto!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.test_text_incorrecto, Toast.LENGTH_SHORT).show();
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.mal_transparente);
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
             bm.recycle();
             respCorrecta = new TextView(this);
-            respCorrecta.setText("La respuesta correcta era: " + listaPalabras[testCont]);
+            respCorrecta.setText(R.string.test_text_wascorrectanswer + listaPalabras[testCont]);
             layoutTest.addView(imgRespuesta);
             layoutTest.addView(respCorrecta);
             layoutTest.addView(btnSiguiente);
@@ -152,7 +152,7 @@ public class TestActivity extends AppCompatActivity{
         layoutTest.removeAllViews();
         testHeader = new TextView(this);
         int i = testCont + 1;
-        testHeader.setText(i + "º Test");
+        testHeader.setText(i + R.string.test_text_numtest);
         video = new VideoView(this);
         MediaController controller = new MediaController(this);
         video.setMediaController(controller);
@@ -160,7 +160,7 @@ public class TestActivity extends AppCompatActivity{
         respuesta = new EditText(this);
         layoutTest.addView(respuesta);
         btnCorregir = new Button(this);
-        btnCorregir.setText("Corregir");
+        btnCorregir.setText(R.string.test_text_botoncorregir);
         btnCorregir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

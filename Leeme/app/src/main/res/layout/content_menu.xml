@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/menu_text_chuches"
-        android:id="@+id/textView3"
+        android:id="@+id/menu_textView_chuches"
         android:layout_alignBottom="@+id/menu_imagebutton_colegio"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

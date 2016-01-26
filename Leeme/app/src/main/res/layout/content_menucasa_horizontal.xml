@@ -55,4 +55,57 @@
         android:layout_alignParentEnd="true"
         android:onClick="showMenu2"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_baino"
+        android:id="@+id/menu_textView_baino"
+        android:layout_alignBottom="@+id/menu_imagebutton_baino"
+        android:layout_alignRight="@+id/menu_imagebutton_baino"
+        android:layout_alignEnd="@+id/menu_imagebutton_baino"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginRight="38dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_salon"
+        android:id="@+id/menu_textView_salon"
+        android:layout_alignTop="@+id/menu_textView_baino"
+        android:layout_alignRight="@+id/menu_imagebutton_salon"
+        android:layout_marginRight="26dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_dormitorio"
+        android:id="@+id/menu_textView_dormitorio"
+        android:layout_marginBottom="-15dp"
+        android:layout_alignBottom="@+id/menu_imagebutton_dormitorio"
+        android:layout_alignLeft="@+id/menu_imagebutton_dormitorio"
+        android:layout_marginLeft="2dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_cocina"
+        android:id="@+id/menu_textView_cocina"
+        android:layout_alignBottom="@+id/menu_imagebutton_dormitorio"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="22dp"
+        android:layout_marginBottom="-15dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
 </RelativeLayout>

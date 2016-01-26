@@ -13,6 +13,36 @@
     <string name="menu_text_parque">PARQUE</string>
     <string name="menu_text_chuches">TIENDA DE CHUCHES</string>
 
+    <string name="menu_text_baino">BAÑO</string>
+    <string name="menu_text_salon">SALON</string>
+    <string name="menu_text_dormitorio">DORMITORIO</string>
+    <string name="menu_text_cocina">COCINA</string>
+
+    <string name="menu_text_clase">CLASE</string>
+    <string name="menu_text_gimnasio">GIMNASIO</string>
+    <string name="menu_text_biblioteca">BIBLIOTECA</string>
+
+    <!-- Strings para el menu2 activity -->
+    <string name="menu2_text_vocabulario">VOCABULARIO</string>
+    <string name="menu2_text_oraciones">ORACIONES</string>
+    <string name="menu2_text_ejercicios">EJERCICIOS</string>
+
+    <!-- Strings para el test activity -->
+    <string name="test_text_escoge">Escoja el tipo de ejercicio:</string>
+    <string name="test_text_vocabulario">Vocabulario</string>
+    <string name="test_text_frases">Oraciones</string>
+    <string name="test_text_boton">Elegir</string>
+    <string name="test_text_numtest">º Test</string>
+    <string name="test_text_botoncorregir">CORREGIR</string>
+    <string name="test_text_botonsiguiente">Siguiente</string>
+    <string name="test_text_correcto">¡Correcto!</string>
+    <string name="test_text_incorrecto">¡Incorrecto!</string>
+    <string name="test_text_wascorrectanswer">La respuesta correcta era: </string>
+
+    <!-- EXTRAS -->
+    <string name="casa">Casa</string>
+    <string name="colegio">Colegio</string>
+    <string name="ayuda">¡Gracias por utilizar Leeme!\nAprende fácilmente a leer los labios</string>
 
     <string name="title_activity_menu2">Menu</string>
     <string name="title_activity_list">ListActivity</string>

@@ -18,20 +18,20 @@
         android:layout_width="125dp"
         android:layout_height="150dp"
         android:id="@+id/menu_imagebutton_clase"
-        android:background="@drawable/colegio"
         android:onClick="showMenu2"
         android:layout_alignTop="@+id/menu_imagebutton_biblioteca"
+        android:layout_marginTop="26dp"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="125dp"
         android:layout_height="150dp"
         android:id="@+id/menu_imagebutton_gimnasio"
-        android:background="@drawable/colegio"
         android:onClick="showMenu2"
         android:layout_marginLeft="33dp"
         android:layout_marginStart="33dp"
-        android:layout_alignTop="@+id/menu_imagebutton_clase"
+        android:layout_alignTop="@+id/menu_imagebutton_biblioteca"
+        android:layout_marginTop="26dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -39,14 +39,53 @@
         android:layout_width="125dp"
         android:layout_height="150dp"
         android:id="@+id/menu_imagebutton_bilblioteca"
-        android:background="@drawable/colegio"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="26dp"
         android:onClick="showMenu2"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="46dp"
         android:layout_marginEnd="46dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_clase"
+        android:id="@+id/menu_textView_clase"
+        android:layout_alignBottom="@+id/menu_imagebutton_clase"
+        android:layout_alignRight="@+id/menu_imagebutton_clase"
+        android:layout_alignEnd="@+id/menu_imagebutton_clase"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginRight="26dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_biblioteca"
+        android:id="@+id/menu_textView_biblioteca"
+        android:layout_alignTop="@+id/menu_textView_clase"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="42dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_gimnasio"
+        android:id="@+id/menu_textView_gimnasio"
+        android:layout_marginBottom="-15dp"
+        android:layout_alignBottom="@+id/menu_imagebutton_gimnasio"
+        android:layout_alignLeft="@+id/menu_imagebutton_gimnasio"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
 
 
 </RelativeLayout>

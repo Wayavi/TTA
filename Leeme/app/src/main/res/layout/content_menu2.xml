@@ -43,4 +43,43 @@
         android:layout_marginBottom="68dp"
         android:onClick="goEjercicios"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu2_text_vocabulario"
+        android:id="@+id/menu2_textView_vocabulario"
+        android:layout_alignBottom="@+id/menu2_imagebutton_vocabulario"
+        android:layout_alignRight="@+id/menu2_imagebutton_vocabulario"
+        android:layout_alignEnd="@+id/menu2_imagebutton_vocabulario"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu2_text_oraciones"
+        android:id="@+id/menu2_textView_oraciones"
+        android:layout_alignBottom="@+id/menu2_imagebutton_oraciones"
+        android:layout_alignRight="@+id/menu2_imagebutton_oraciones"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu2_text_ejercicios"
+        android:id="@+id/menu2_textView_ejercicios"
+        android:layout_marginBottom="-15dp"
+        android:layout_alignBottom="@+id/menu2_imagebutton_ejercicios"
+        android:layout_alignLeft="@+id/menu2_imagebutton_ejercicios"
+        android:layout_marginLeft="28dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
 </RelativeLayout>

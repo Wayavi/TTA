@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements Resizeable {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Here comes the help", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, R.string.ayuda, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

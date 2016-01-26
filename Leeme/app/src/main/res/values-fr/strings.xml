@@ -14,6 +14,36 @@
     <string name="menu_text_parque">PARKEA</string>
     <string name="menu_text_chuches">GOZOKI DENDA</string>
 
+    <string name="menu_text_baino">BAINUGELA</string>
+    <string name="menu_text_salon">EGONGELA</string>
+    <string name="menu_text_dormitorio">LOGELA</string>
+    <string name="menu_text_cocina">SUKALDEA</string>
+
+    <string name="menu_text_clase">KLASEA</string>
+    <string name="menu_text_gimnasio">GIMNASIOA</string>
+    <string name="menu_text_biblioteca">LIBURUTEGIA</string>
+
+    <!-- Strings para el menu2 activity -->
+    <string name="menu2_text_vocabulario">HIZTEGIA</string>
+    <string name="menu2_text_oraciones">ESALDIAK</string>
+    <string name="menu2_text_ejercicios">ARIKETAK</string>
+
+    <!-- Strings para el test activity -->
+    <string name="test_text_escoge">Ariketa mota aukera esazu:</string>
+    <string name="test_text_vocabulario">Hiztegia</string>
+    <string name="test_text_frases">Esaldiak</string>
+    <string name="test_text_boton">Aukeratu</string>
+    <string name="test_text_numtest">º Testa</string>
+    <string name="test_text_botoncorregir">ZUZENDU</string>
+    <string name="test_text_botonsiguiente">Hurrengoa</string>
+    <string name="test_text_correcto">¡Oso ongi!</string>
+    <string name="test_text_incorrecto">¡Oker!</string>
+    <string name="test_text_wascorrectanswer">Erantzun zuzena honakoa zen: </string>
+
+    <!-- EXTRAS -->
+    <string name="casa">Etxea</string>
+    <string name="colegio">Eskola</string>
+    <string name="ayuda">¡Gracias por utilizar Leeme!\n\nEsta aplicación te ayudara a aprender a leer los labios</string>
 
     <string name="title_activity_menu2">Menu</string>
     <string name="title_activity_list">ListActivity</string>

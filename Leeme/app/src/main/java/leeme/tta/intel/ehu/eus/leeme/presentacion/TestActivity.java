@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,7 +43,7 @@ public class TestActivity extends AppCompatActivity{
     private LinearLayout layoutTest;
 
     private int index;
-    private int testCont = 0;
+    private int testCont = 6;
     private int numCorrectas = 0;
     private int numIncorrectas = 0;
     private String listaPalabras[];
@@ -101,6 +102,26 @@ public class TestActivity extends AppCompatActivity{
             }
         });
         layoutTest.addView(btnCorregir);
+
+        LinearLayout layoutPuntuacion = new LinearLayout(this);
+        layoutPuntuacion.setOrientation(LinearLayout.HORIZONTAL);
+        layoutPuntuacion.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        ImageView puntuacionCorrecta = new ImageView(this);
+        ImageView puntuacionIncorrecta = new ImageView(this);
+        Bitmap bmMal = BitmapFactory.decodeResource(getResources(), R.drawable.mal_transparente);
+        Bitmap bmBien = BitmapFactory.decodeResource(getResources(), R.drawable.bien_transparente);
+        puntuacionCorrecta.setImageBitmap(Utils.bitmapResize(bmBien, 100));
+        puntuacionIncorrecta.setImageBitmap(Utils.bitmapResize(bmMal, 100));
+        TextView txtCorrecto = new TextView(this);
+        txtCorrecto.setText(String.valueOf(numCorrectas));
+        TextView txtIncorrecto = new TextView(this);
+        txtIncorrecto.setText(String.valueOf(numIncorrectas));
+        layoutPuntuacion.addView(puntuacionCorrecta);
+        layoutPuntuacion.addView(txtCorrecto);
+        layoutPuntuacion.addView(puntuacionIncorrecta);
+        layoutPuntuacion.addView(txtIncorrecto);
+        layoutTest.addView(layoutPuntuacion);
+
         loadContent();
 
     }
@@ -177,10 +198,25 @@ public class TestActivity extends AppCompatActivity{
         {
             video.setVideoURI(Uri.parse(SERVER_URL + '/' + urlVideos[testCont]));
         }
-        video.setVisibility(View.VISIBLE);
-        respuesta.setText("");
-        respuesta.setVisibility(View.VISIBLE);
-        btnCorregir.setVisibility(View.VISIBLE);
+
+        LinearLayout layoutPuntuacion = new LinearLayout(this);
+        layoutPuntuacion.setOrientation(LinearLayout.HORIZONTAL);
+        layoutPuntuacion.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        ImageView puntuacionCorrecta = new ImageView(this);
+        ImageView puntuacionIncorrecta = new ImageView(this);
+        Bitmap bmMal = BitmapFactory.decodeResource(getResources(), R.drawable.mal_transparente);
+        Bitmap bmBien = BitmapFactory.decodeResource(getResources(), R.drawable.bien_transparente);
+        puntuacionCorrecta.setImageBitmap(Utils.bitmapResize(bmBien, 100));
+        puntuacionIncorrecta.setImageBitmap(Utils.bitmapResize(bmMal, 100));
+        TextView txtCorrecto = new TextView(this);
+        txtCorrecto.setText(String.valueOf(numCorrectas));
+        TextView txtIncorrecto = new TextView(this);
+        txtIncorrecto.setText(String.valueOf(numIncorrectas));
+        layoutPuntuacion.addView(puntuacionCorrecta);
+        layoutPuntuacion.addView(txtCorrecto);
+        layoutPuntuacion.addView(puntuacionIncorrecta);
+        layoutPuntuacion.addView(txtIncorrecto);
+        layoutTest.addView(layoutPuntuacion);
     }
 
     public void loadContent()

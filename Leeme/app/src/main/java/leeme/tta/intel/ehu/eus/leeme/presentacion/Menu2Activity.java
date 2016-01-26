@@ -47,19 +47,133 @@ public class Menu2Activity extends AppCompatActivity implements Resizeable {
 
     public void goVocabulario(View view)
     {
-        Toast.makeText(this, getIntent().getStringExtra("EXTRA_MENU"), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,getIntent().getStringExtra("EXTRA_SUBMENU"),Toast.LENGTH_SHORT).show();
-
+        Intent intent = createLearnIntent(getIntent(), "vocabulario");
+        startActivity(intent);
     }
 
     public void goOraciones(View view)
     {
-
+        Intent intent = createLearnIntent(getIntent(), "oraciones");
+        startActivity(intent);
     }
 
     public void goEjercicios(View view)
     {
+        Intent intent = getIntent();
+        String menu = intent.getStringExtra("EXTRA_MENU");
+        String submenu = intent.getStringExtra("EXTRA_SUBMENU");
+        String tipo = intent.getStringExtra("EXTRA_TIPO");
+        String intentMenu = "";
+        String intentSubmenu = "";
+        if(menu.contains("casa"))
+        {
+            intentMenu = "Casa";
+            if(submenu.contains("baino"))
+            {
+                intentSubmenu = "Baino";
+            }
+            else if(submenu.contains("salon"))
+            {
+                intentSubmenu = "Salon";
+            }
+            else if(submenu.contains("cocina"))
+            {
+                intentSubmenu = "Cocina";
+            }
+            else if(submenu.contains("dormitorio"))
+            {
+                intentSubmenu = "Dormitorio";
+            }
+        }
+        else if(menu.contains("colegio"))
+        {
+            intentMenu = "Colegio";
+            if(submenu.contains("clase"))
+            {
+                intentSubmenu = "Clase";
+            }
+            else if(submenu.contains("biblioteca"))
+            {
+                intentSubmenu = "Biblioteca";
+            }
+            else if(submenu.contains("gimnasio"))
+            {
+                intentSubmenu = "Gimnasio";
+            }
+        }
+        else if(menu.contains("parque"))
+        {
+            intentMenu = "Parque";
+            intentSubmenu = "";
+        }
+        else if(menu.contains("chuches"))
+        {
+            intentMenu = "Chuches";
+            intentSubmenu = "";
+        }
+        Intent intentNew = new Intent(this, TestActivity.class);
+        intentNew.putExtra("EXTRA_MENU", intentMenu);
+        intentNew.putExtra("EXTRA_SUBMENU", intentSubmenu);
+        startActivity(intentNew);
+    }
 
+    public Intent createLearnIntent(Intent receivedIntent, String tipo)
+    {
+        String menu = receivedIntent.getStringExtra("EXTRA_MENU");
+        String submenu = receivedIntent.getStringExtra("EXTRA_SUBMENU");
+        String intentMenu = "";
+        String intentSubmenu = "";
+        if(menu.contains("casa"))
+        {
+            intentMenu = "Casa";
+            if(submenu.contains("baino"))
+            {
+                intentSubmenu = "Baino";
+            }
+            else if(submenu.contains("salon"))
+            {
+                intentSubmenu = "Salon";
+            }
+            else if(submenu.contains("cocina"))
+            {
+                intentSubmenu = "Cocina";
+            }
+            else if(submenu.contains("dormitorio"))
+            {
+                intentSubmenu = "Dormitorio";
+            }
+        }
+        else if(menu.contains("colegio"))
+        {
+            intentMenu = "Colegio";
+            if(submenu.contains("clase"))
+            {
+                intentSubmenu = "Clase";
+            }
+            else if(submenu.contains("biblioteca"))
+            {
+                intentSubmenu = "Biblioteca";
+            }
+            else if(submenu.contains("gimnasio"))
+            {
+                intentSubmenu = "Gimnasio";
+            }
+        }
+        else if(menu.contains("parque"))
+        {
+            intentMenu = "Parque";
+            intentSubmenu = "";
+        }
+        else if(menu.contains("chuches"))
+        {
+            intentMenu = "Chuches";
+            intentSubmenu = "";
+        }
+        Intent intent = new Intent(this, ListActivity.class);
+        intent.putExtra("EXTRA_MENU", intentMenu);
+        intent.putExtra("EXTRA_SUBMENU", intentSubmenu);
+        intent.putExtra("EXTRA_TIPO", tipo);
+        return intent;
     }
 
     @Override

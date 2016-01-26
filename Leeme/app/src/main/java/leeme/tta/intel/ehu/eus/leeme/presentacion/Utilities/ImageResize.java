@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,6 +34,13 @@ public class ImageResize
             throws IOException {
         Size size = getRoughSize(resources, resId, newHeight);
         roughScaleImage(resources, resId, size);
+        scaleImage(newHeight);
+    }
+
+    public ImageResize(Bitmap bitmap, int newHeight)
+            throws IOException {
+        Size size = getRoughSize(bitmap, newHeight);
+        roughScaleImage(bitmap, size);
         scaleImage(newHeight);
     }
 
@@ -96,6 +104,28 @@ public class ImageResize
             size.sample *= 2;
         }
         return size;
+    }
+
+    private Size getRoughSize(Bitmap bitmap, int newHeight) {
+        //BitmapFactory.Options o = new BitmapFactory.Options();
+        //o.inJustDecodeBounds = true;
+
+        Size size = getRoughSize(bitmap.getWidth(), bitmap.getHeight(), newHeight);
+        return size;
+    }
+
+    private void roughScaleImage(Bitmap bitmap, Size size) {
+        Matrix matrix = new Matrix();
+        matrix.postScale(size.scale, size.scale);
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        BitmapFactory.Options scaledOpts = new BitmapFactory.Options();
+        scaledOpts.inSampleSize = size.sample;
+        scaled = BitmapFactory.decodeByteArray(byteArray,0,byteArray.length,scaledOpts);
+
     }
 
 

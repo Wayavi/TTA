@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Leeme</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings para la main activity -->
+    <string name="main_button_start">Sartu</string>
+    <string name="title_activity_menu">Menua</string>
+    <string name="title_activity_menu2">Menua</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_learn">LearnActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+</resources>

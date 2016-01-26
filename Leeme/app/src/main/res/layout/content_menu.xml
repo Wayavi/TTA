@@ -59,4 +59,47 @@
         android:layout_alignParentEnd="true"
         android:onClick="showMenu2"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="CASA"
+        android:id="@+id/menu_textView_casa"
+        android:layout_alignTop="@+id/menu_imagebutton_casa"
+        android:layout_alignRight="@+id/menu_imagebutton_casa"
+        android:layout_alignEnd="@+id/menu_imagebutton_casa"
+        android:layout_marginTop="51dp"
+        android:layout_marginRight="42dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/menu_textView_casa"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView2"
+        android:layout_marginBottom="65dp"
+        android:layout_alignBottom="@+id/menu_imagebutton_colegio"
+        android:layout_alignLeft="@+id/menu_textView_casa"
+        android:layout_alignStart="@+id/menu_textView_casa" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

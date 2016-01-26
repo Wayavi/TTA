@@ -58,6 +58,7 @@ public class CustomList extends ArrayAdapter<String>
                     {
                         InputStream is = conn.getInputStream();
                         final Bitmap bitmap = BitmapFactory.decodeStream(is);
+
                         //TODO: falta aplicar el resize al bitmap para que la app no pete por falta de memoria en la carga de imagen
                         img.setImageBitmap(bitmap);
                     }

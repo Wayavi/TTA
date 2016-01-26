@@ -63,7 +63,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
                     else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                         setContentView(R.layout.activity_menucasa_horizontal);
 
-                    int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+                    int[] drawables = {R.drawable.dormitorio, R.drawable.cocina, R.drawable.salon, R.drawable.baino};
                     int[] ids = {R.id.menu_imagebutton_dormitorio, R.id.menu_imagebutton_cocina, R.id.menu_imagebutton_salon, R.id.menu_imagebutton_baino};
                     imageResize(drawables,ids,Resizeable.PANELSCALE);
                 }
@@ -74,7 +74,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
                     else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                         setContentView(R.layout.activity_menuescuela_horizontal);
 
-                    int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+                    int[] drawables = {R.drawable.biblioteca, R.drawable.clase, R.drawable.gimnasio};
                     int[] ids = {R.id.menu_imagebutton_biblioteca, R.id.menu_imagebutton_clase, R.id.menu_imagebutton_gimnasio};
                     imageResize(drawables,ids,Resizeable.PANELSCALE);
                 }
@@ -110,7 +110,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_menucasa_horizontal);
 
-        int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+        int[] drawables = {R.drawable.dormitorio, R.drawable.cocina, R.drawable.salon, R.drawable.baino};
         int[] ids = {R.id.menu_imagebutton_dormitorio, R.id.menu_imagebutton_cocina, R.id.menu_imagebutton_salon, R.id.menu_imagebutton_baino};
         imageResize(drawables,ids,Resizeable.PANELSCALE);
     }
@@ -123,7 +123,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_menuescuela_horizontal);
 
-        int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+        int[] drawables = {R.drawable.biblioteca, R.drawable.clase, R.drawable.gimnasio};
         int[] ids = {R.id.menu_imagebutton_biblioteca, R.id.menu_imagebutton_clase, R.id.menu_imagebutton_gimnasio};
         imageResize(drawables,ids,Resizeable.PANELSCALE);
     }
@@ -134,12 +134,11 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
             menu=view.getResources().getResourceName(view.getId());
         else
             subMenu=view.getResources().getResourceName(view.getId());
-        Toast.makeText(this,menu,Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,subMenu,Toast.LENGTH_SHORT).show();
-        /*Intent intent = new Intent(this, Menu2Activity.class);
+
+        Intent intent = new Intent(this, Menu2Activity.class);
         intent.putExtra("EXTRA_MENU",menu);
         intent.putExtra("EXTRA_SUBMENU", subMenu);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override

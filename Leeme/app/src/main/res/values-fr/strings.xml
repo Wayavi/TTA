@@ -6,8 +6,16 @@
 
     <!-- Strings para la main activity -->
     <string name="main_button_start">Sartu</string>
-    <string name="title_activity_menu">Menua</string>
-    <string name="title_activity_menu2">Menua</string>
+
+    <!-- Strings para el menu activity-->
+    <string name="title_activity_menu">Menu</string>
+    <string name="menu_text_casa">ETXEA</string>
+    <string name="menu_text_colegio">ESKOLA</string>
+    <string name="menu_text_parque">PARKEA</string>
+    <string name="menu_text_chuches">GOZOKI DENDA</string>
+
+
+    <string name="title_activity_menu2">Menu</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_learn">LearnActivity</string>
     <string name="title_activity_test">TestActivity</string>

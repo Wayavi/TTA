@@ -48,7 +48,6 @@
         android:layout_toStartOf="@+id/menu_imagebutton_chuches"
         android:onClick="showMenu2"/>
 
-
     <ImageButton
         android:layout_width="125dp"
         android:layout_height="150dp"

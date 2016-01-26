@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +40,8 @@ public class TestActivity extends AppCompatActivity {
     private TextView respCorrecta;
     private ImageView imgRespuesta;
 
-    private int testCont = 0;
+    private int index;
+    private int testCont = 6;
     private String listaPalabras[];
     private String hitzZerrenda[];
     private String urlVideos[];
@@ -83,60 +84,6 @@ public class TestActivity extends AppCompatActivity {
         controller.setAnchorView(video);
         video.setMediaController(controller);
         respuesta = (EditText)findViewById(R.id.test_edittext_respuesta);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try
-                {
-                    String peticion = SERVER_URL + '/' + QUERY_VOCABULARIO + "?cat=Parque";
-                    URL url = new URL(peticion);
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    int code = conn.getResponseCode();
-                    if(code == 200)
-                    {
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        JSONObject json = new JSONObject(br.readLine());
-                        int numPalabras = json.length();
-                        listaPalabras = new String[numPalabras];
-                        hitzZerrenda = new String[numPalabras];
-                        urlVideos = new String [numPalabras];
-                        urlBideoak = new String[numPalabras];
-
-                        for(int i = 0; i < numPalabras; i++)
-                        {
-                            int index = i + 1;
-                            JSONObject palabra = json.getJSONObject( String.valueOf(index));
-                            String cast = palabra.getString("palabra");
-                            String eusk = palabra.getString("hitza");
-                            String vid = palabra.getString("video");
-                            String bid = palabra.getString("bideoa");
-
-                            listaPalabras[i] = cast;
-                            hitzZerrenda[i] = eusk;
-                            urlVideos[i] = vid;
-                            urlBideoak[i] = bid;
-                        }
-
-                        //TODO: seleccionar euskera o castellano en función del idioma
-                        video.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                video.setVideoURI(Uri.parse(SERVER_URL + urlVideos[testCont]));
-                            }
-                        });
-
-                    }
-                    else
-                    {
-                        Toast.makeText(TestActivity.this, "No se ha podido comunicar con el servidor", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
     public void seleccionarTipo(View view)
@@ -144,9 +91,8 @@ public class TestActivity extends AppCompatActivity {
         RadioGroup grupo = (RadioGroup)findViewById(R.id.test_radiogroup_gurpo);
         int selectedId = grupo.getCheckedRadioButtonId();
         View buttonView = findViewById(selectedId);
-        int index = grupo.indexOfChild(buttonView);
-        //RadioButton radio = (RadioButton)grupo.getChildAt(index);
-        Toast.makeText(this, index, Toast.LENGTH_SHORT).show();
+        index = grupo.indexOfChild(buttonView);
+        loadContent();
 
     }
 
@@ -183,10 +129,106 @@ public class TestActivity extends AppCompatActivity {
         imgRespuesta.setVisibility(View.INVISIBLE);
         respCorrecta.setVisibility(View.INVISIBLE);
         btnSiguiente.setVisibility(View.INVISIBLE);
-        video.setVideoURI(Uri.parse(SERVER_URL + urlVideos[testCont]));
+        if(index == 0)
+        {
+            video.setVideoURI(Uri.parse(SERVER_URL + urlVideos[testCont]));
+        }
+        else
+        {
+            video.setVideoURI(Uri.parse(SERVER_URL + '/' + urlVideos[testCont]));
+        }
         video.setVisibility(View.VISIBLE);
         respuesta.setText("");
         respuesta.setVisibility(View.VISIBLE);
         btnCorregir.setVisibility(View.VISIBLE);
+    }
+
+    public void loadContent()
+    {
+        final String urlPeticion;
+        if(index == 0)
+        {
+            urlPeticion = SERVER_URL + '/' + QUERY_VOCABULARIO + "?cat=Parque";;
+        }
+        else
+        {
+            urlPeticion = SERVER_URL + '/' + QUERY_FRASES + "?cat=Parque";
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            try
+            {
+                URL url = new URL(urlPeticion);
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                int code = conn.getResponseCode();
+                if(code == 200)
+                {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    JSONObject json = new JSONObject(br.readLine());
+                    int numPalabras = json.length();
+                    listaPalabras = new String[numPalabras];
+                    hitzZerrenda = new String[numPalabras];
+                    urlVideos = new String [numPalabras];
+                    urlBideoak = new String[numPalabras];
+
+                    for(int i = 0; i < numPalabras; i++)
+                    {
+                        int indice = i + 1;
+                        JSONObject palabra = json.getJSONObject( String.valueOf(indice));
+                        String cast, eusk;
+                        if(index == 0)
+                        {
+                            cast = palabra.getString("palabra");
+                            eusk = palabra.getString("hitza");
+                        }
+                        else
+                        {
+                            cast = palabra.getString("oracion");
+                            eusk = palabra.getString("esaldia");
+                        }
+
+                        String vid = palabra.getString("video");
+                        String bid = palabra.getString("bideoa");
+
+                        listaPalabras[i] = cast;
+                        hitzZerrenda[i] = eusk;
+                        urlVideos[i] = vid;
+                        urlBideoak[i] = bid;
+                    }
+
+                    //TODO: seleccionar euskera o castellano en función del idioma
+                    video.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(index == 0)
+                            {
+                                video.setVideoURI(Uri.parse(SERVER_URL + urlVideos[testCont]));
+                            }
+                            else
+                            {
+                                video.setVideoURI(Uri.parse(SERVER_URL + '/' + urlVideos[testCont]));
+
+                            }
+                        }
+                    });
+                }
+                else
+                {
+                    Toast.makeText(TestActivity.this, "No se ha podido comunicar con el servidor", Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            }
+        }).start();
+        LinearLayout linearMain = (LinearLayout)findViewById(R.id.test_linearlayout);
+        LinearLayout linearEscoger = (LinearLayout)findViewById(R.id.test_linearlayout_escoger);
+        LinearLayout linearTest = (LinearLayout)findViewById(R.id.test_linearlayout_test);
+        linearMain.removeView(linearEscoger);
+        linearTest.setVisibility(View.VISIBLE);
     }
 }

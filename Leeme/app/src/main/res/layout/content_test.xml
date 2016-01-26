@@ -11,7 +11,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="leeme.tta.intel.ehu.eus.leeme.presentacion.TestActivity"
     tools:showIn="@layout/activity_test"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/test_linearlayout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/test_linearlayout_test"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible">
 
         <VideoView
             android:layout_width="match_parent"

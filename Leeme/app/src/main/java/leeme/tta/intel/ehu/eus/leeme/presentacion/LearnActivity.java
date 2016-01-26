@@ -50,7 +50,7 @@ public class LearnActivity extends AppCompatActivity {
             {
                 //Queremos que el MediaController siempre este visible
                 this.show();
-            };
+            }
 
             @Override
             public boolean dispatchKeyEvent(KeyEvent event)

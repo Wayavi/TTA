@@ -2,6 +2,8 @@ package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,8 +24,9 @@ import java.io.IOException;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Resizeable;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Resizeable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +50,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    public void imageResize()
-    {
-        try {
-            ImageResize resizeLogo= new ImageResize(getResources(),R.drawable.icon,400);
-            ImageResize resizeLeeme = new ImageResize(getResources(),R.drawable.leeme_sin,400);
-            //ImageResize resizeChuches = new ImageResize(getResources(),R.drawable.chuches,400);
-            ImageView logo = (ImageView)findViewById(R.id.main_image_logo);
-            ImageView leeme = (ImageView)findViewById(R.id.main_image_leeme);
-            //ImageView chuches = (ImageView)findViewById(R.id.menu_imagebutton_chuches);
-            logo.setImageBitmap(resizeLogo.getScaled());
-            leeme.setImageBitmap(resizeLeeme.getScaled());
-            // chuches.setImageBitmap(resizeChuches.getScaled());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
    /* @Override
@@ -112,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            Toast.makeText(this, "FUCK", Toast.LENGTH_SHORT).show();
             onBackPressed();
             return true;
         }
@@ -124,6 +109,30 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed()
     {
         finish();
+    }
+
+    @Override
+    public void imageResize(int[] drawables, int[] ids, int newSize) {
+
+    }
+
+    @Override
+    public Bitmap bitmapResize(Bitmap bitmap, int newSize) {
+        return null;
+    }
+
+    @Override
+    public void imageResize() {
+        try {
+            ImageResize resizeLogo= new ImageResize(getResources(),R.drawable.icon,300);
+            ImageResize resizeLeeme = new ImageResize(getResources(),R.drawable.leeme_sin,300);
+            ImageView logo = (ImageView)findViewById(R.id.main_image_logo);
+            ImageView leeme = (ImageView)findViewById(R.id.main_image_leeme);
+            logo.setImageBitmap(resizeLogo.getScaled());
+            leeme.setImageBitmap(resizeLeeme.getScaled());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

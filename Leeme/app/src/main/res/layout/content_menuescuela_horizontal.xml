@@ -20,7 +20,7 @@
         android:id="@+id/menu_imagebutton_clase"
         android:background="@drawable/colegio"
         android:onClick="showMenu2"
-        android:layout_alignTop="@+id/menu_imagebutton_bilblioteca"
+        android:layout_alignTop="@+id/menu_imagebutton_biblioteca"
         android:layout_centerHorizontal="true" />
 
     <ImageButton

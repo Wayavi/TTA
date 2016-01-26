@@ -1,6 +1,7 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,7 +23,7 @@ import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Resizeable;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity implements Resizeable {
 
     private String menu;
     private String subMenu;
@@ -36,7 +37,6 @@ public class MenuActivity extends AppCompatActivity {
         display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 
         layoutCreate(savedInstanceState);
-        imageResize();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,28 +51,6 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
-    public void imageResize()
-    {
-        try {
-            ImageResize resizeCasa = new ImageResize(getResources(),R.drawable.casa,450);
-            ImageResize resizeParque = new ImageResize(getResources(),R.drawable.parque,450);
-            ImageResize resizeChuches = new ImageResize(getResources(),R.drawable.chuches,450);
-            ImageResize resizeColegio = new ImageResize(getResources(),R.drawable.colegio,450);
-            ImageView casa = (ImageView)findViewById(R.id.menu_imagebutton_casa);
-            ImageView parque = (ImageView)findViewById(R.id.menu_imagebutton_parque);
-            ImageView chuches = (ImageView)findViewById(R.id.menu_imagebutton_chuches);
-            ImageView colegio = (ImageView)findViewById(R.id.menu_imagebutton_colegio);
-            //casa.setImageBitmap(resizeCasa.getScaled());
-            casa.setBackground(new BitmapDrawable(getResources(),resizeCasa.getScaled()));
-            parque.setImageBitmap(resizeParque.getScaled());
-            chuches.setImageBitmap(resizeChuches.getScaled());
-            colegio.setImageBitmap(resizeColegio.getScaled());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     private void layoutCreate(Bundle savedInstanceState){
         if(savedInstanceState != null)
         {
@@ -84,6 +62,10 @@ public class MenuActivity extends AppCompatActivity {
                         setContentView(R.layout.activity_menucasa);
                     else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                         setContentView(R.layout.activity_menucasa_horizontal);
+
+                    int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+                    int[] ids = {R.id.menu_imagebutton_dormitorio, R.id.menu_imagebutton_cocina, R.id.menu_imagebutton_salon, R.id.menu_imagebutton_baino};
+                    imageResize(drawables,ids,Resizeable.PANELSCALE);
                 }
                 else if(savedInstanceState.getString("menu").contains("colegio")){
                     menu=savedInstanceState.getString("menu");
@@ -91,6 +73,10 @@ public class MenuActivity extends AppCompatActivity {
                         setContentView(R.layout.activity_menuescuela);
                     else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                         setContentView(R.layout.activity_menuescuela_horizontal);
+
+                    int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+                    int[] ids = {R.id.menu_imagebutton_biblioteca, R.id.menu_imagebutton_clase, R.id.menu_imagebutton_gimnasio};
+                    imageResize(drawables,ids,Resizeable.PANELSCALE);
                 }
             }
             else {
@@ -98,6 +84,10 @@ public class MenuActivity extends AppCompatActivity {
                     setContentView(R.layout.activity_menu);
                 else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                     setContentView(R.layout.activity_menu_horizontal);
+
+                int[] drawables = {R.drawable.casa,R.drawable.parque, R.drawable.colegio, R.drawable.chuches};
+                int[] ids = {R.id.menu_imagebutton_casa, R.id.menu_imagebutton_parque, R.id.menu_imagebutton_colegio, R.id.menu_imagebutton_chuches};
+                imageResize(drawables,ids,Resizeable.PANELSCALE);
             }
         }
         else {
@@ -105,6 +95,10 @@ public class MenuActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_menu);
             else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                 setContentView(R.layout.activity_menu_horizontal);
+
+            int[] drawables = {R.drawable.casa,R.drawable.parque, R.drawable.colegio, R.drawable.chuches};
+            int[] ids = {R.id.menu_imagebutton_casa, R.id.menu_imagebutton_parque, R.id.menu_imagebutton_colegio, R.id.menu_imagebutton_chuches};
+            imageResize(drawables,ids,Resizeable.PANELSCALE);
         }
     }
 
@@ -115,6 +109,10 @@ public class MenuActivity extends AppCompatActivity {
             setContentView(R.layout.activity_menucasa);
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_menucasa_horizontal);
+
+        int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+        int[] ids = {R.id.menu_imagebutton_dormitorio, R.id.menu_imagebutton_cocina, R.id.menu_imagebutton_salon, R.id.menu_imagebutton_baino};
+        imageResize(drawables,ids,Resizeable.PANELSCALE);
     }
 
     public void showEscuela(View view){
@@ -124,6 +122,10 @@ public class MenuActivity extends AppCompatActivity {
             setContentView(R.layout.activity_menuescuela);
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_menuescuela_horizontal);
+
+        int[] drawables = {R.drawable.leeme_sin, R.drawable.leeme_sin, R.drawable.leeme_sin};
+        int[] ids = {R.id.menu_imagebutton_biblioteca, R.id.menu_imagebutton_clase, R.id.menu_imagebutton_gimnasio};
+        imageResize(drawables,ids,Resizeable.PANELSCALE);
     }
 
     public void showMenu2(View view)
@@ -175,4 +177,27 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void imageResize(int[] drawables, int[] ids, int newSize) {
+        try {
+            for(int i=0;i<ids.length;i++) {
+                ImageResize image = new ImageResize(getResources(),drawables[i],newSize);
+                ImageView view = (ImageView)findViewById(ids[i]);
+                view.setBackground(new BitmapDrawable(getResources(),image.getScaled()));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Bitmap bitmapResize(Bitmap bitmap, int newSize) {
+        return null;
+    }
+
+    @Override
+    public void imageResize() {
+
+    }
 }

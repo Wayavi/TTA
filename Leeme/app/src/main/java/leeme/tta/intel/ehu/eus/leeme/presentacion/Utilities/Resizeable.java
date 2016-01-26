@@ -12,8 +12,24 @@ import java.io.IOException;
  */
 public interface Resizeable {
 
-    public void imageResize(int[] drawables, int[] ids);
+    public final static int PANELSCALE=460;
+    public final static int xxxxxxSCALE=0;
 
-    public void imageResize(Bitmap bitmap);
+    public void imageResize();
+
+    public void imageResize(int[] drawables, int[] ids, int newSize);
+
+    public Bitmap bitmapResize(Bitmap bitmap, int newSize);
+
+    /*public Bitmap imageResize(Bitmap bitmap, int newSize)
+    {
+        try {
+            ImageResize image = new ImageResize(bitmap,newSize);
+            return image.getScaled();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }*/
 
 }

@@ -62,8 +62,9 @@ public class TestActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(TestActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -143,7 +144,7 @@ public class TestActivity extends AppCompatActivity{
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
             bm.recycle();
             respCorrecta = new TextView(this);
-            respCorrecta.setText(R.string.test_text_wascorrectanswer + listaPalabras[testCont]);
+            respCorrecta.setText(R.string.test_text_wascorrectanswer+ listaPalabras[testCont]);
             layoutTest.addView(imgRespuesta);
             layoutTest.addView(respCorrecta);
             layoutTest.addView(btnSiguiente);
@@ -156,13 +157,9 @@ public class TestActivity extends AppCompatActivity{
         layoutTest.removeAllViews();
         testHeader = new TextView(this);
         int i = testCont + 1;
-<<<<<<< HEAD
         testHeader.setText(i + R.string.test_text_numtest);
-=======
-        testHeader.setText(i + "º Test");
         testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
         layoutTest.addView(testHeader);
->>>>>>> 319eec4a2a5e0cd51b20d5672cd8b641136845b3
         video = new VideoView(this);
         MediaController controller = new MediaController(this);
         video.setMediaController(controller);

@@ -45,8 +45,9 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "You found the super secret!\nThe super secret is that you are GAY!!!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

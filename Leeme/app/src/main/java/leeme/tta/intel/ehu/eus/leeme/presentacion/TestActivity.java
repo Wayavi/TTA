@@ -26,6 +26,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
+
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
@@ -46,10 +48,12 @@ public class TestActivity extends AppCompatActivity{
     private int testCont = 6;
     private int numCorrectas = 0;
     private int numIncorrectas = 0;
+    private String urlParams = "";
     private String listaPalabras[];
     private String hitzZerrenda[];
     private String urlVideos[];
     private String urlBideoak[];
+    private String listaUrls[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,16 @@ public class TestActivity extends AppCompatActivity{
 
         //Custom code
         Intent intent = getIntent();
+        String menu = intent.getStringExtra("EXTRA_MENU");
+        String submenu = intent.getStringExtra("EXTRA_SUBMENU");
+        if(menu != null)
+        {
+            urlParams += "?cat=" + menu;
+            if(submenu != null)
+            {
+                urlParams += "&subc=" + submenu;
+            }
+        }
         //Se deberia coger la categoria y subcategoria
         layoutTest = (LinearLayout)findViewById(R.id.test_linearlayout_test);
     }
@@ -122,8 +136,17 @@ public class TestActivity extends AppCompatActivity{
                 siguienteTest(v);
             }
         });
-        //TODO: falta escoger el array correcto de resultados en base al idioma
-        if(resp.equalsIgnoreCase(listaPalabras[testCont]))
+        String listaContenido[];
+        if(Locale.getDefault().getDisplayLanguage().contains("esp"))
+        {
+            listaContenido = listaPalabras;
+        }
+        else
+        {
+            listaContenido = hitzZerrenda;
+        }
+
+        if(resp.equalsIgnoreCase(listaContenido[testCont]))
         {
             //Respuesta correcta
             numCorrectas++;
@@ -143,7 +166,7 @@ public class TestActivity extends AppCompatActivity{
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
             bm.recycle();
             respCorrecta = new TextView(this);
-            respCorrecta.setText(R.string.test_text_wascorrectanswer + listaPalabras[testCont]);
+            respCorrecta.setText(R.string.test_text_wascorrectanswer + listaContenido[testCont]);
             layoutTest.addView(imgRespuesta);
             layoutTest.addView(respCorrecta);
             layoutTest.addView(btnSiguiente);
@@ -156,13 +179,9 @@ public class TestActivity extends AppCompatActivity{
         layoutTest.removeAllViews();
         testHeader = new TextView(this);
         int i = testCont + 1;
-<<<<<<< HEAD
         testHeader.setText(i + R.string.test_text_numtest);
-=======
-        testHeader.setText(i + "º Test");
         testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
         layoutTest.addView(testHeader);
->>>>>>> 319eec4a2a5e0cd51b20d5672cd8b641136845b3
         video = new VideoView(this);
         MediaController controller = new MediaController(this);
         video.setMediaController(controller);
@@ -179,14 +198,17 @@ public class TestActivity extends AppCompatActivity{
         });
         layoutTest.addView(btnCorregir);
 
-        if(index == 0)
+        /*if(index == 0)
         {
-            video.setVideoURI(Uri.parse(SERVER_URL + urlVideos[testCont]));
+            video.setVideoURI(Uri.parse(SERVER_URL + listaUrls[testCont]));
         }
         else
         {
-            video.setVideoURI(Uri.parse(SERVER_URL + '/' + urlVideos[testCont]));
-        }
+            video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
+        }*/
+
+        video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
+
 
         LinearLayout layoutPuntuacion = createScore();
         layoutTest.addView(layoutPuntuacion);
@@ -197,11 +219,11 @@ public class TestActivity extends AppCompatActivity{
         final String urlPeticion;
         if(index == 0)
         {
-            urlPeticion = SERVER_URL + '/' + QUERY_VOCABULARIO + "?cat=Parque";;
+            urlPeticion = SERVER_URL + '/' + QUERY_VOCABULARIO + urlParams;;
         }
         else
         {
-            urlPeticion = SERVER_URL + '/' + QUERY_FRASES + "?cat=Parque";
+            urlPeticion = SERVER_URL + '/' + QUERY_FRASES + urlParams;
         }
 
         new Thread(new Runnable() {
@@ -247,18 +269,26 @@ public class TestActivity extends AppCompatActivity{
                         urlBideoak[i] = bid;
                     }
 
-                    //TODO: seleccionar euskera o castellano en función del idioma
+                    if(Locale.getDefault().getDisplayLanguage().contains("esp"))
+                    {
+                        listaUrls = urlVideos;
+                    }
+                    else
+                    {
+                        listaUrls = urlBideoak;
+                    }
                     video.post(new Runnable() {
                         @Override
                         public void run() {
-                            if(index == 0)
+                            /*if(index == 0)
                             {
-                                video.setVideoURI(Uri.parse(SERVER_URL + urlVideos[testCont]));
+                                video.setVideoURI(Uri.parse(SERVER_URL + listaUrls[testCont]));
                             }
                             else
                             {
-                                video.setVideoURI(Uri.parse(SERVER_URL + '/' + urlVideos[testCont]));
-                            }
+                                video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
+                            }*/
+                            video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
                         }
                     });
                 }

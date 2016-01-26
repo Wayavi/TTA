@@ -1,6 +1,7 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.CustomList;
@@ -114,7 +116,20 @@ public class ListActivity extends AppCompatActivity {
                         urlBideoak[i] = bid;
 
                         final ListView lista = (ListView)findViewById(R.id.list_listview_lista);
-                        final CustomList adaptador = new CustomList(ListActivity.this, listaPalabras, urlImagenes);
+                        final String listaContenido[];
+                        final String listaUrls[];
+                        if(Locale.getDefault().getDisplayLanguage().contains("esp"))
+                        {
+                            listaContenido = listaPalabras;
+                            listaUrls = urlVideos;
+                        }
+                        else
+                        {
+                            listaContenido = hitzZerrenda;
+                            listaUrls = urlBideoak;
+                        }
+
+                        final CustomList adaptador = new CustomList(ListActivity.this, listaContenido, urlImagenes);
                         lista.post(new Runnable() {
                             @Override
                             public void run() {
@@ -126,8 +141,8 @@ public class ListActivity extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent intent = new Intent(ListActivity.this, LearnActivity.class);
-                                intent.putExtra(EXTRA_DISPLAY, listaPalabras[position]);
-                                intent.putExtra(EXTRA_VIDEO, urlVideos[position]);
+                                intent.putExtra(EXTRA_DISPLAY, listaContenido[position]);
+                                intent.putExtra(EXTRA_VIDEO, listaUrls[position]);
                                 startActivity(intent);
                             }
                         });

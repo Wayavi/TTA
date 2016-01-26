@@ -62,7 +62,6 @@ public class Menu2Activity extends AppCompatActivity implements Resizeable {
         Intent intent = getIntent();
         String menu = intent.getStringExtra("EXTRA_MENU");
         String submenu = intent.getStringExtra("EXTRA_SUBMENU");
-        String tipo = intent.getStringExtra("EXTRA_TIPO");
         String intentMenu = "";
         String intentSubmenu = "";
         if(menu.contains("casa"))

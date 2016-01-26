@@ -55,4 +55,57 @@
         android:layout_alignParentEnd="true"
         android:onClick="showMenu2"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_casa"
+        android:id="@+id/menu_textView_casa"
+        android:layout_alignBottom="@+id/menu_imagebutton_casa"
+        android:layout_alignRight="@+id/menu_imagebutton_casa"
+        android:layout_alignEnd="@+id/menu_imagebutton_casa"
+        android:layout_marginBottom="-15dp"
+        android:layout_marginRight="34dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_parque"
+        android:id="@+id/menu_textView_parque"
+        android:layout_alignTop="@+id/menu_textView_casa"
+        android:layout_alignRight="@+id/menu_imagebutton_parque"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/menu_text_colegio"
+        android:id="@+id/menu_textView_colegio"
+        android:layout_marginBottom="-15dp"
+        android:layout_alignBottom="@+id/menu_imagebutton_colegio"
+        android:layout_alignLeft="@+id/menu_imagebutton_colegio"
+        android:layout_marginLeft="18dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/menu_text_chuches"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/menu_imagebutton_colegio"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="-15dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#FFFFFF"/>
+
 </RelativeLayout>

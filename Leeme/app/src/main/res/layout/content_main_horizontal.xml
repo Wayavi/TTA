@@ -49,4 +49,26 @@
         android:layout_alignRight="@+id/main_image_leeme"
         android:layout_alignEnd="@+id/main_image_leeme" />
 
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/main_image_euskera"
+            android:layout_weight="0.23"
+            android:onClick="selectLanguage"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="220dp"/>
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/main_image_español"
+            android:layout_weight="0.11"
+            android:onClick="selectLanguage"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="220dp"/>
+    </GridLayout>
+
 </RelativeLayout>

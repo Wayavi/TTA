@@ -8,8 +8,39 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/fondo"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="leeme.tta.intel.ehu.eus.leeme.presentacion.Menu2Activity"
     tools:showIn="@layout/activity_menu2">
+
+    <ImageButton
+        android:layout_width="170dp"
+        android:layout_height="120dp"
+        android:id="@+id/menu2_imagebutton_vocabulario"
+        tools:targetApi="16"
+        android:layout_above="@+id/menu2_imagebutton_oraciones"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="goVocabulario"/>
+
+    <ImageButton
+        android:layout_width="170dp"
+        android:layout_height="120dp"
+        android:id="@+id/menu2_imagebutton_oraciones"
+
+        android:layout_above="@+id/menu2_imagebutton_ejercicios"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="goOraciones"/>
+
+    <ImageButton
+        android:layout_width="170dp"
+        android:layout_height="120dp"
+        android:id="@+id/menu2_imagebutton_ejercicios"
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="68dp"
+        android:onClick="goEjercicios"/>
 
 </RelativeLayout>

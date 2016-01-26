@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
@@ -94,6 +95,24 @@ public class MainActivity extends AppCompatActivity implements Resizeable {
         startActivity(intent);
     }
 
+    public void selectLanguage(View view)
+    {
+        Locale locale=null;
+        if(view.getResources().getResourceName(view.getId()).contains("euskera"))
+            locale = new Locale("fr");
+        if(view.getResources().getResourceName(view.getId()).contains("españo"))
+            locale = new Locale("es");
+
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        this.getApplicationContext().getResources().updateConfiguration(config, null);
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
@@ -126,10 +145,16 @@ public class MainActivity extends AppCompatActivity implements Resizeable {
         try {
             ImageResize resizeLogo= new ImageResize(getResources(),R.drawable.icon,300);
             ImageResize resizeLeeme = new ImageResize(getResources(),R.drawable.leeme_sin,300);
+            ImageResize resizeSpain = new ImageResize(getResources(),R.drawable.spain,150);
+            ImageResize resizeEuskera = new ImageResize(getResources(),R.drawable.ikurrina,165);
             ImageView logo = (ImageView)findViewById(R.id.main_image_logo);
             ImageView leeme = (ImageView)findViewById(R.id.main_image_leeme);
+            ImageView spain = (ImageView)findViewById(R.id.main_image_español);
+            ImageView euskera = (ImageView)findViewById(R.id.main_image_euskera);
             logo.setImageBitmap(resizeLogo.getScaled());
             leeme.setImageBitmap(resizeLeeme.getScaled());
+            spain.setImageBitmap(resizeSpain.getScaled());
+            euskera.setImageBitmap(resizeEuskera.getScaled());
         } catch (IOException e) {
             e.printStackTrace();
         }

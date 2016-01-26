@@ -48,6 +48,24 @@ public class CustomList extends ArrayAdapter<String> implements Resizeable
         /*new Thread(new Runnable() {
             @Override
             public void run() {
+<<<<<<< HEAD
+                String path = SERVER_URL + '/' + urlImagenes[position];
+                try
+                {
+                    URL url = new URL(path);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    int code = conn.getResponseCode();
+                    if(code == 200)
+                    {
+                        InputStream is = conn.getInputStream();
+                        final Bitmap bitmap = BitmapFactory.decodeStream(is);
+
+                        //TODO: falta aplicar el resize al bitmap para que la app no pete por falta de memoria en la carga de imagen
+                        img.setImageBitmap(bitmap);
+                    }
+                }
+                catch(Exception e)
+=======
             String path = SERVER_URL + '/' + urlImagenes[1];
             try
             {
@@ -55,6 +73,7 @@ public class CustomList extends ArrayAdapter<String> implements Resizeable
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                 int code = conn.getResponseCode();
                 if(code == 200)
+>>>>>>> 9afe3659be9eaf5195703fb12303be2a1e7fb74e
                 {
                     InputStream is = conn.getInputStream();
                     //TODO: falta aplicar el resize al bitmap para que la app no pete por falta de memoria en la carga de imagen

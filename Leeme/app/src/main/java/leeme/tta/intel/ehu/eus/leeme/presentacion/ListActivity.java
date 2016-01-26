@@ -24,7 +24,7 @@ public class ListActivity extends AppCompatActivity {
     public static final String EXTRA_VIDEO = "eus.ehu.intel.tta.Leeme.Video";
 
     private final String SERVER_URL = "http://51.254.127.111/Leeme/";
-    private final String VOCABULARY_QUERY = "vocabularioPorCategoria.php";
+    private String urlParams;
 
     private String listaPalabras[];
     private String hitzZerrenda[];
@@ -40,12 +40,38 @@ public class ListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Custom code
+        Intent intent = getIntent();
+        String menu = intent.getStringExtra("EXTRA_MENU");
+        String submenu = intent.getStringExtra("EXTRA_SUBMENU");
+        String tipo = intent.getStringExtra("EXTRA_TIPO");
+        urlParams = "";
+        final int type;
+        if(tipo.equalsIgnoreCase("vocabulario"))
+        {
+            urlParams += "/vocabularioPorCategoria.php";
+            type = 1;
+        }
+        else
+        {
+            urlParams += "/oracionesPorCategoria.php";
+            type = 2;
+        }
+
+        if(menu != null)
+        {
+            urlParams += "?cat=" + menu;
+        }
+        if(submenu != null && submenu != "")
+        {
+            urlParams += "&subc=" + submenu;
+        }
+
         new Thread(new Runnable() {
             @Override
             public void run() {
             try
             {
-                String peticion = SERVER_URL + VOCABULARY_QUERY + "?cat=Parque";
+                String peticion = SERVER_URL + urlParams;
                 URL url = new URL(peticion);
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                 int code = conn.getResponseCode();
@@ -64,15 +90,26 @@ public class ListActivity extends AppCompatActivity {
                     {
                         int index = i + 1;
                         JSONObject palabra = json.getJSONObject( String.valueOf(index));
-                        String cast = palabra.getString("palabra");
-                        String eusk = palabra.getString("hitza");
-                        String img = palabra.getString("imagen");
+                        String cast;
+                        String eusk;
+                        String img = "";
+                        if(type == 1)
+                        {
+                            cast = palabra.getString("palabra");
+                            eusk = palabra.getString("hitza");
+                            img = palabra.getString("imagen");
+                            urlImagenes[i] = img;
+                        }
+                        else
+                        {
+                            cast = palabra.getString("oracion");
+                            eusk = palabra.getString("esaldia");
+                        }
                         String vid = palabra.getString("video");
                         String bid = palabra.getString("bideoa");
 
                         listaPalabras[i] = cast;
                         hitzZerrenda[i] = eusk;
-                        urlImagenes[i] = img;
                         urlVideos[i] = vid;
                         urlBideoak[i] = bid;
 

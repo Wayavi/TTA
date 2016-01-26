@@ -35,27 +35,10 @@
         android:layout_weight="0.11"
         android:onClick="showMenu"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lista"
-        android:id="@+id/buttonList"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11"
-        android:onClick="goList"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test"
-        android:id="@+id/buttonTest"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11"
-        android:onClick="goTest"/>
-
     <GridLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"

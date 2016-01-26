@@ -43,10 +43,10 @@
     <!-- EXTRAS -->
     <string name="casa">Etxea</string>
     <string name="colegio">Eskola</string>
-    <string name="ayuda">¡Gracias por utilizar Leeme!\n\nEsta aplicación te ayudara a aprender a leer los labios</string>
+    <string name="ayuda">¡Eskerrikasko Leeme aukeratzeagatik!\nEspainak irakurtzen ikas esazu modu errasean</string>
 
     <string name="title_activity_menu2">Menu</string>
-    <string name="title_activity_list">ListActivity</string>
-    <string name="title_activity_learn">LearnActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_list">Listing</string>
+    <string name="title_activity_learn">Learning</string>
+    <string name="title_activity_test">Test</string>
 </resources>

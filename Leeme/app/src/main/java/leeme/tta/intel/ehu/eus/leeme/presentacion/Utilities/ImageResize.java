@@ -119,7 +119,7 @@ public class ImageResize
         matrix.postScale(size.scale, size.scale);
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         byte[] byteArray = stream.toByteArray();
 
         BitmapFactory.Options scaledOpts = new BitmapFactory.Options();

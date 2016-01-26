@@ -43,68 +43,68 @@ public class ListActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try
+            try
+            {
+                String peticion = SERVER_URL + VOCABULARY_QUERY + "?cat=Parque";
+                URL url = new URL(peticion);
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                int code = conn.getResponseCode();
+                if(code == 200)
                 {
-                    String peticion = SERVER_URL + VOCABULARY_QUERY + "?cat=Parque";
-                    URL url = new URL(peticion);
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    int code = conn.getResponseCode();
-                    if(code == 200)
-                    {
-                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        JSONObject json = new JSONObject(br.readLine());
-                        int numPalabras = json.length();
-                        listaPalabras = new String[numPalabras];
-                        hitzZerrenda = new String[numPalabras];
-                        urlImagenes = new String[numPalabras];
-                        urlVideos = new String [numPalabras];
-                        urlBideoak = new String[numPalabras];
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    JSONObject json = new JSONObject(br.readLine());
+                    int numPalabras = json.length();
+                    listaPalabras = new String[numPalabras];
+                    hitzZerrenda = new String[numPalabras];
+                    urlImagenes = new String[numPalabras];
+                    urlVideos = new String [numPalabras];
+                    urlBideoak = new String[numPalabras];
 
-                        for(int i = 0; i < numPalabras; i++)
+                    for(int i = 0; i < numPalabras; i++)
+                    {
+                        int index = i + 1;
+                        JSONObject palabra = json.getJSONObject( String.valueOf(index));
+                        String cast = palabra.getString("palabra");
+                        String eusk = palabra.getString("hitza");
+                        String img = palabra.getString("imagen");
+                        String vid = palabra.getString("video");
+                        String bid = palabra.getString("bideoa");
+
+                        listaPalabras[i] = cast;
+                        hitzZerrenda[i] = eusk;
+                        urlImagenes[i] = img;
+                        urlVideos[i] = vid;
+                        urlBideoak[i] = bid;
+
+                        final ListView lista = (ListView)findViewById(R.id.list_listview_lista);
+                        final CustomList adaptador = new CustomList(ListActivity.this, listaPalabras, urlImagenes);
+                        lista.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                lista.setAdapter(adaptador);
+                            }
+                        });
+                        lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
                         {
-                            int index = i + 1;
-                            JSONObject palabra = json.getJSONObject( String.valueOf(index));
-                            String cast = palabra.getString("palabra");
-                            String eusk = palabra.getString("hitza");
-                            String img = palabra.getString("imagen");
-                            String vid = palabra.getString("video");
-                            String bid = palabra.getString("bideoa");
-
-                            listaPalabras[i] = cast;
-                            hitzZerrenda[i] = eusk;
-                            urlImagenes[i] = img;
-                            urlVideos[i] = vid;
-                            urlBideoak[i] = bid;
-
-                            final ListView lista = (ListView)findViewById(R.id.list_listview_lista);
-                            final CustomList adaptador = new CustomList(ListActivity.this, listaPalabras, urlImagenes);
-                            lista.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    lista.setAdapter(adaptador);
-                                }
-                            });
-                            lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
-                            {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Intent intent = new Intent(ListActivity.this, LearnActivity.class);
-                                    intent.putExtra(EXTRA_DISPLAY, listaPalabras[position]);
-                                    intent.putExtra(EXTRA_VIDEO, urlVideos[position]);
-                                    startActivity(intent);
-                                }
-                            });
-                        }
-                    }
-                    else
-                    {
-                        Toast.makeText(ListActivity.this, "No se ha podido comunicar con el servidor", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(ListActivity.this, LearnActivity.class);
+                                intent.putExtra(EXTRA_DISPLAY, listaPalabras[position]);
+                                intent.putExtra(EXTRA_VIDEO, urlVideos[position]);
+                                startActivity(intent);
+                            }
+                        });
                     }
                 }
-                catch(Exception e)
+                else
                 {
-                    e.printStackTrace();
+                    Toast.makeText(ListActivity.this, "No se ha podido comunicar con el servidor", Toast.LENGTH_SHORT).show();
                 }
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
             }
         }).start();
     }

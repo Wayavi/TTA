@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class Utils
 {
@@ -47,6 +48,18 @@ public class Utils
         {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static String getCurrentLenguage()
+    {
+        if(Locale.getDefault().getDisplayLanguage().contains("esp"))
+        {
+            return "Castellano";
+        }
+        else
+        {
+            return "Euskera";
         }
     }
 }

@@ -98,7 +98,7 @@ public class TestActivity extends AppCompatActivity{
         //Creamos el contenido
         testHeader = new TextView(this);
         int i = testCont + 1;
-        testHeader.setText(i + R.string.test_text_numtest);
+        testHeader.setText(i + getString(R.string.test_text_numtest));
         testHeader.setTextSize(16);
         testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
         layoutTest.addView(testHeader);
@@ -167,11 +167,7 @@ public class TestActivity extends AppCompatActivity{
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
             bm.recycle();
             respCorrecta = new TextView(this);
-<<<<<<< HEAD
             respCorrecta.setText(R.string.test_text_wascorrectanswer + listaContenido[testCont]);
-=======
-            respCorrecta.setText(R.string.test_text_wascorrectanswer+ listaPalabras[testCont]);
->>>>>>> 5517ab1dc78f6bbeec1126b8865f6e91b89873d0
             layoutTest.addView(imgRespuesta);
             layoutTest.addView(respCorrecta);
             layoutTest.addView(btnSiguiente);
@@ -184,7 +180,7 @@ public class TestActivity extends AppCompatActivity{
         layoutTest.removeAllViews();
         testHeader = new TextView(this);
         int i = testCont + 1;
-        testHeader.setText(i + R.string.test_text_numtest);
+        testHeader.setText(i + getString(R.string.test_text_numtest));
         testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
         layoutTest.addView(testHeader);
         video = new VideoView(this);

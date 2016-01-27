@@ -33,6 +33,15 @@ public class Utils
         }
     }
 
+    public static void imageResize(int drawables, ImageView views, int newSize, Resources contexto) {
+        try {
+            ImageResize image = new ImageResize(contexto,drawables,newSize);
+            views.setBackground(new BitmapDrawable(contexto,image.getScaled()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void imageResize(int[] drawables, ImageView[] views, int newSize, Resources contexto) {
         try {
             for(int i=0;i<drawables.length;i++) {
@@ -65,13 +74,13 @@ public class Utils
 
     public static String getCurrentLenguage()
     {
-        if(Locale.getDefault().getDisplayLanguage().contains("esp"))
+        if(Locale.getDefault().getDisplayLanguage().contains("fr"))
         {
-            return "Castellano";
+            return "Euskera";
         }
         else
         {
-            return "Euskera";
+            return "Castellano";
         }
     }
 

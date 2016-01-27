@@ -21,7 +21,7 @@
         android:id="@+id/test_linearlayout_escoger"
         android:orientation="vertical"
         android:background="@color/white"
-        android:padding="20dp">
+        android:padding="20dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/test_linearlayout_test"
         android:orientation="vertical"
         android:visibility="invisible">
@@ -70,11 +70,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/test_textview_numtest"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp" />
 
         <VideoView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:id="@+id/test_videoview_video"
             android:layout_gravity="center_horizontal" />
 
@@ -120,26 +122,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="100dp">
 
             <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/test_imageview_correctas"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/test_textview_correctas"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="20dp"/>
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:id="@+id/test_imageview_incorrectas"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -26,7 +26,6 @@ import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Oraciones;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Vocabulario;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Frase;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.HttpClient;
-import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Palabra;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
@@ -42,7 +41,7 @@ public class TestActivity extends AppCompatActivity{
     private LinearLayout layoutTest;
 
     private int index;
-    private int testCont = 10;
+    private int testCont = 1;
     private int numCorrectas = 0;
     private int numIncorrectas = 0;
     private String urlParams = "";
@@ -81,7 +80,7 @@ public class TestActivity extends AppCompatActivity{
         layoutTest = (LinearLayout)findViewById(R.id.test_linearlayout_test);
         video = (VideoView)findViewById(R.id.test_videoview_video);
         MediaController controller = new MediaController(this);
-        controller.setAnchorView(video);
+        controller.setAnchorView(findViewById(R.id.test_linearlayout));
         video.setMediaController(controller);
         respuesta = (EditText)findViewById(R.id.test_edittext_respuesta);
         btnSiguiente = (Button)findViewById(R.id.test_button_siguiente);
@@ -109,9 +108,9 @@ public class TestActivity extends AppCompatActivity{
         testHeader.setText(testCont + getString(R.string.test_text_numtest));
         txtCorrectas.setText(String.valueOf(numCorrectas));
         txtIncorrectas.setText((String.valueOf(numIncorrectas)));
-        //
-        //imgCorrectas.setImageBitmap(Utils.bitmapResize());
-        //imgIncorrectas;
+        Utils.imageResize(R.drawable.bien_transparente, imgCorrectas, 100, getResources());
+        Utils.imageResize(R.drawable.mal_transparente, imgIncorrectas, 100, getResources());
+
         layoutTest.setVisibility(View.VISIBLE);
 
         //LinearLayout layoutPuntuacion = createScore();
@@ -123,74 +122,56 @@ public class TestActivity extends AppCompatActivity{
     public void corregirTest(View view)
     {
         String resp = respuesta.getText().toString();
-        layoutTest.removeAllViews();
-        imgRespuesta = new ImageView(this);
-        btnSiguiente = new Button(this);
-        btnSiguiente.setText(R.string.test_text_botonsiguiente);
-        btnSiguiente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                siguienteTest(v);
-            }
-        });
+        video.setVisibility(View.GONE);
+        respuesta.setVisibility(View.GONE);
+        btnCorregir.setVisibility(View.GONE);
+
+        imgRespuesta.setVisibility(View.VISIBLE);
+        respCorrecta.setVisibility(View.VISIBLE);
+        btnSiguiente.setVisibility(View.VISIBLE);
 
         if(resp.equalsIgnoreCase(cadenas[testCont]))
         {
             //Respuesta correcta
             numCorrectas++;
-            Toast.makeText(this, R.string.test_text_correcto, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.test_text_correcto), Toast.LENGTH_SHORT).show();
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.bien_transparente);
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
-            layoutTest.addView(imgRespuesta);
-            layoutTest.addView(btnSiguiente);
             bm.recycle();
         }
         else
         {
             //Respuesta incorrecta
             numIncorrectas++;
-            Toast.makeText(this, R.string.test_text_incorrecto, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.test_text_incorrecto), Toast.LENGTH_SHORT).show();
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.mal_transparente);
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
             bm.recycle();
-            respCorrecta = new TextView(this);
-            respCorrecta.setText(R.string.test_text_wascorrectanswer + cadenas[testCont]);
-            layoutTest.addView(imgRespuesta);
-            layoutTest.addView(respCorrecta);
-            layoutTest.addView(btnSiguiente);
+            respCorrecta.setText(getString(R.string.test_text_wascorrectanswer) + cadenas[testCont]);
+            respCorrecta.setVisibility(View.VISIBLE);
         }
+
+        txtCorrectas.setText(String.valueOf(numCorrectas));
+        txtIncorrectas.setText(String.valueOf(numIncorrectas));
         testCont++;
     }
 
     public void siguienteTest(View view)
     {
-        layoutTest.removeAllViews();
-        testHeader = new TextView(this);
-        int i = testCont + 1;
-        testHeader.setText(i + getString(R.string.test_text_numtest));
-        testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
-        layoutTest.addView(testHeader);
-        video = new VideoView(this);
-        MediaController controller = new MediaController(this);
-        video.setMediaController(controller);
-        layoutTest.addView(video);
-        respuesta = new EditText(this);
-        layoutTest.addView(respuesta);
-        btnCorregir = new Button(this);
-        btnCorregir.setText(R.string.test_text_botoncorregir);
-        btnCorregir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                corregirTest(v);
-            }
-        });
-        layoutTest.addView(btnCorregir);
-
+        testHeader.setText(testCont + getString(R.string.test_text_numtest));
         video.setVideoURI(Uri.parse(SERVER_URL + '/' + urls[testCont]));
 
+        video.setVisibility(View.VISIBLE);
+        respuesta.setText("");
+        respuesta.setVisibility(View.VISIBLE);
+        btnCorregir.setVisibility(View.VISIBLE);
 
-        LinearLayout layoutPuntuacion = createScore();
-        layoutTest.addView(layoutPuntuacion);
+        imgRespuesta.setVisibility(View.GONE);
+        respCorrecta.setVisibility(View.GONE);
+        btnSiguiente.setVisibility(View.GONE);
+        respCorrecta.setText("");
+        respCorrecta.setVisibility(View.GONE);
+
     }
 
     public void loadContent()
@@ -232,27 +213,5 @@ public class TestActivity extends AppCompatActivity{
                 }
             }
         }).start();
-    }
-
-    public LinearLayout createScore()
-    {
-        LinearLayout layoutPuntuacion = new LinearLayout(this);
-        layoutPuntuacion.setOrientation(LinearLayout.HORIZONTAL);
-        layoutPuntuacion.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        ImageView puntuacionCorrecta = new ImageView(this);
-        ImageView puntuacionIncorrecta = new ImageView(this);
-        Bitmap bmMal = BitmapFactory.decodeResource(getResources(), R.drawable.mal_transparente);
-        Bitmap bmBien = BitmapFactory.decodeResource(getResources(), R.drawable.bien_transparente);
-        puntuacionCorrecta.setImageBitmap(Utils.bitmapResize(bmBien, 100));
-        puntuacionIncorrecta.setImageBitmap(Utils.bitmapResize(bmMal, 100));
-        TextView txtCorrecto = new TextView(this);
-        txtCorrecto.setText(String.valueOf(numCorrectas));
-        TextView txtIncorrecto = new TextView(this);
-        txtIncorrecto.setText(String.valueOf(numIncorrectas));
-        layoutPuntuacion.addView(puntuacionCorrecta);
-        layoutPuntuacion.addView(txtCorrecto);
-        layoutPuntuacion.addView(puntuacionIncorrecta);
-        layoutPuntuacion.addView(txtIncorrecto);
-        return layoutPuntuacion;
     }
 }

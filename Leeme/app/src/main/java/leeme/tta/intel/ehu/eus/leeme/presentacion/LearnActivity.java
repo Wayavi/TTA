@@ -18,7 +18,7 @@ import leeme.tta.intel.ehu.eus.leeme.R;
 
 public class LearnActivity extends AppCompatActivity {
 
-    private final String SERVER_URL = "http://51.254.127.111/Leeme/";
+    private final String SERVER_URL = "http://51.254.127.111/Leeme";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,16 @@ public class LearnActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String cadena = intent.getStringExtra(ListActivity.EXTRA_DISPLAY);
         String url = intent.getStringExtra(ListActivity.EXTRA_VIDEO);
+        int type = intent.getIntExtra(ListActivity.EXTRA_TYPE, 0);
+        if(type == 2)
+        {
+            url = "/" + url;
+        }
 
         TextView titulo = (TextView)findViewById(R.id.learn_textview_titulo);
         titulo.setText(cadena);
         final VideoView video = (VideoView)findViewById(R.id.learn_videoview_video);
         final MediaController controller = new MediaController(this){
-            @Override
-            public void hide()
-            {
-                //Queremos que el MediaController siempre este visible
-                this.show();
-            }
-
             @Override
             public boolean dispatchKeyEvent(KeyEvent event)
             {

@@ -1,7 +1,6 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Locale;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Oraciones;
@@ -31,8 +22,9 @@ public class ListActivity extends AppCompatActivity {
 
     public static final String EXTRA_DISPLAY = "eus.ehu.intel.tta.Leeme.Display";
     public static final String EXTRA_VIDEO = "eus.ehu.intel.tta.Leeme.Video";
+    public static final String EXTRA_TYPE = "eus.ehu.intel.tta.Leeme.Tipo";
 
-    private final String SERVER_URL = "http://51.254.127.111/Leeme/";
+    private final String SERVER_URL = "http://51.254.127.111/Leeme";
     private String urlParams;
     private int type;
 
@@ -120,6 +112,7 @@ public class ListActivity extends AppCompatActivity {
                         Intent intent = new Intent(ListActivity.this, LearnActivity.class);
                         intent.putExtra(EXTRA_DISPLAY, cadenas[position]);
                         intent.putExtra(EXTRA_VIDEO, urls[position]);
+                        intent.putExtra(EXTRA_TYPE, type);
                         startActivity(intent);
                     }
                 });

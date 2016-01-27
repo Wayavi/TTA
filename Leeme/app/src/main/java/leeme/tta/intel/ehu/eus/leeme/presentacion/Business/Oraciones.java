@@ -54,7 +54,7 @@ public class Oraciones
         int cont = 0;
         for(Frase f : frases)
         {
-            if(idioma.contains("esp"))
+            if(idioma.equals("Castellano"))
             {
                 cadenas[cont] = f.getCastellano();
             }
@@ -65,6 +65,25 @@ public class Oraciones
             cont++;
         }
         return cadenas;
+    }
+
+    public String[] getVideoUrls(Frase[] frases, String idioma)
+    {
+        String urls[] = new String[frases.length];
+        int cont = 0;
+        for(Frase f : frases)
+        {
+            if(idioma.equals("Castellano"))
+            {
+                urls[cont] = f.getVideo();
+            }
+            else
+            {
+                urls[cont] = f.getBideo();
+            }
+            cont++;
+        }
+        return urls;
     }
 
 

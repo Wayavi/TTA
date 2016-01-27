@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import java.io.IOException;
 import java.util.Locale;
 
+import leeme.tta.intel.ehu.eus.leeme.R;
+
 public class Utils
 {
     public final static int PANELSCALE=460;
@@ -17,8 +19,16 @@ public class Utils
         //No need to implement here
     }
 
-    public void imageResize(int[] drawables, int[] ids, int newSize) {
+    public static void imageResize(int[] drawables, ImageView[] views, int[] newSizes, Resources contexto) {
+        try {
+            for(int i=0;i<drawables.length;i++) {
+                ImageResize image = new ImageResize(contexto,drawables[i],newSizes[i]);
+                views[i].setBackground(new BitmapDrawable(contexto,image.getScaled()));
+            }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void imageResize(int[] drawables, ImageView[] views, int newSize, Resources contexto) {

@@ -24,7 +24,7 @@ import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Resizeable;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
-public class MenuActivity extends AppCompatActivity implements Resizeable {
+public class MenuActivity extends AppCompatActivity {
 
     private String menu;
     private String subMenu;
@@ -69,9 +69,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
                     else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                         setContentView(R.layout.activity_menucasa_horizontal);
 
-                    int[] drawables = {R.drawable.dormitorio, R.drawable.cocina, R.drawable.salon, R.drawable.baino};
-                    int[] ids = {R.id.menu_imagebutton_dormitorio, R.id.menu_imagebutton_cocina, R.id.menu_imagebutton_salon, R.id.menu_imagebutton_baino};
-                    imageResize(drawables,ids,Resizeable.PANELSCALE);
+                    getPanels("casa");
                 }
                 else if(savedInstanceState.getString("menu").contains("colegio")){
                     menu=savedInstanceState.getString("menu");
@@ -80,9 +78,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
                     else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                         setContentView(R.layout.activity_menuescuela_horizontal);
 
-                    int[] drawables = {R.drawable.biblioteca, R.drawable.clase, R.drawable.gimnasio};
-                    int[] ids = {R.id.menu_imagebutton_biblioteca, R.id.menu_imagebutton_clase, R.id.menu_imagebutton_gimnasio};
-                    imageResize(drawables,ids,Resizeable.PANELSCALE);
+                    getPanels("colegio");
                 }
             }
             else {
@@ -91,9 +87,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
                 else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                     setContentView(R.layout.activity_menu_horizontal);
 
-                int[] drawables = {R.drawable.casa,R.drawable.parque, R.drawable.colegio, R.drawable.chuches};
-                int[] ids = {R.id.menu_imagebutton_casa, R.id.menu_imagebutton_parque, R.id.menu_imagebutton_colegio, R.id.menu_imagebutton_chuches};
-                imageResize(drawables,ids,Resizeable.PANELSCALE);
+                getPanels("menu");
             }
         }
         else {
@@ -102,9 +96,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
             else if (display.getRotation() == Surface.ROTATION_270 || display.getRotation() == Surface.ROTATION_90)
                 setContentView(R.layout.activity_menu_horizontal);
 
-            int[] drawables = {R.drawable.casa,R.drawable.parque, R.drawable.colegio, R.drawable.chuches};
-            int[] ids = {R.id.menu_imagebutton_casa, R.id.menu_imagebutton_parque, R.id.menu_imagebutton_colegio, R.id.menu_imagebutton_chuches};
-            imageResize(drawables,ids,Resizeable.PANELSCALE);
+            getPanels("menu");
         }
     }
 
@@ -116,9 +108,8 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_menucasa_horizontal);
 
-        int[] drawables = {R.drawable.dormitorio, R.drawable.cocina, R.drawable.salon, R.drawable.baino};
-        int[] ids = {R.id.menu_imagebutton_dormitorio, R.id.menu_imagebutton_cocina, R.id.menu_imagebutton_salon, R.id.menu_imagebutton_baino};
-        imageResize(drawables,ids,Resizeable.PANELSCALE);
+        getPanels("casa");
+        Utils.imageResize(drawables, panels, Utils.PANELSCALE, getResources());
     }
 
     public void showEscuela(View view){
@@ -129,9 +120,8 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_menuescuela_horizontal);
 
-        int[] drawables = {R.drawable.biblioteca, R.drawable.clase, R.drawable.gimnasio};
-        int[] ids = {R.id.menu_imagebutton_biblioteca, R.id.menu_imagebutton_clase, R.id.menu_imagebutton_gimnasio};
-        imageResize(drawables,ids,Resizeable.PANELSCALE);
+        getPanels("colegio");
+        Utils.imageResize(drawables, panels, Utils.PANELSCALE, getResources());
     }
 
     public void showMenu2(View view)
@@ -145,6 +135,32 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         intent.putExtra("EXTRA_MENU",menu);
         intent.putExtra("EXTRA_SUBMENU", subMenu);
         startActivity(intent);
+    }
+
+    public void getPanels(String menu)
+    {
+        drawables=null;
+        panels=null;
+        if(menu.equals("menu")) {
+            int[] drawables = {R.drawable.casa, R.drawable.parque, R.drawable.colegio, R.drawable.chuches};
+            this.drawables = drawables;
+            ImageView[] panels = {(ImageView) findViewById(R.id.menu_imagebutton_casa), (ImageView) findViewById(R.id.menu_imagebutton_parque), (ImageView) findViewById(R.id.menu_imagebutton_colegio), (ImageView) findViewById(R.id.menu_imagebutton_chuches)};
+            this.panels = panels;
+        }
+        if(menu.equals("casa"))
+        {
+            int[] drawables = {R.drawable.dormitorio, R.drawable.cocina, R.drawable.salon, R.drawable.baino};
+            this.drawables = drawables;
+            ImageView[] panels = {(ImageView)findViewById(R.id.menu_imagebutton_dormitorio), (ImageView)findViewById(R.id.menu_imagebutton_cocina), (ImageView)findViewById(R.id.menu_imagebutton_salon), (ImageView)findViewById(R.id.menu_imagebutton_baino)};
+            this.panels=panels;
+        }
+        if(menu.equals("colegio"))
+        {
+            int[] drawables2 = {R.drawable.clase, R.drawable.biblioteca, R.drawable.gimnasio};
+            drawables = drawables2;
+            ImageView[] panels2 = {(ImageView)findViewById(R.id.menu_imagebutton_clase), (ImageView)findViewById(R.id.menu_imagebutton_biblioteca), (ImageView)findViewById(R.id.menu_imagebutton_gimnasio)};
+            panels=panels2;
+        }
     }
 
     @Override
@@ -182,7 +198,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         }
     }
 
-    @Override
+    /*@Override
     public void imageResize(int[] drawables, int[] ids, int newSize) {
         try {
             for(int i=0;i<ids.length;i++) {
@@ -204,5 +220,5 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
     @Override
     public void imageResize() {
 
-    }
+    }*/
 }

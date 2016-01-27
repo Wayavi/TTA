@@ -20,6 +20,7 @@ import java.util.Locale;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Oraciones;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Vocabulario;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.CustomList;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Frase;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.HttpClient;
@@ -33,6 +34,7 @@ public class ListActivity extends AppCompatActivity {
 
     private final String SERVER_URL = "http://51.254.127.111/Leeme/";
     private String urlParams;
+    private int type;
 
     private Frase[] frases;
     private Palabra[] palabras;
@@ -68,11 +70,11 @@ public class ListActivity extends AppCompatActivity {
         urlParams = "";
         if(tipo.equalsIgnoreCase("vocabulario"))
         {
-            urlParams += "vocabularioPorCategoria.php";
+            type = 1;
         }
         else
         {
-            urlParams += "oracionesPorCategoria.php";
+            type = 2;
         }
 
         if(menu != null)
@@ -89,10 +91,20 @@ public class ListActivity extends AppCompatActivity {
             public void run() {
             try
             {
-                Oraciones business = new Oraciones(new HttpClient(SERVER_URL));
-                frases = business.getFrasesByCategory(urlParams);
-                cadenas = business.getFrasesStrings(frases, Utils.getCurrentLenguage());
-                urls = business.getVideoUrls(frases, Utils.getCurrentLenguage());
+                if(type == 1)
+                {
+                    Vocabulario business = new Vocabulario(new HttpClient(SERVER_URL));
+                    palabras = business.getPalabrasByCategory(urlParams);
+                    cadenas = business.getPalabrasStrings(palabras, Utils.getCurrentLenguage());
+                    urls = business.getVideoUrls(palabras, Utils.getCurrentLenguage());
+                }
+                else
+                {
+                    Oraciones business = new Oraciones(new HttpClient(SERVER_URL));
+                    frases = business.getFrasesByCategory(urlParams);
+                    cadenas = business.getFrasesStrings(frases, Utils.getCurrentLenguage());
+                    urls = business.getVideoUrls(frases, Utils.getCurrentLenguage());
+                }
 
                 final CustomList adaptador = new CustomList(ListActivity.this, cadenas);
                 lista.post(new Runnable() {

@@ -11,6 +11,7 @@ import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.HttpClient;
 public class Oraciones
 {
     private HttpClient cliente;
+    private final String CONTENT_PATH = "oracionesPorCategoria.php";
 
     public Oraciones(HttpClient cl)
     {
@@ -20,9 +21,10 @@ public class Oraciones
     public Frase[] getFrasesByCategory(String path)
     {
         Frase[] frases = null;
+
         try
         {
-            JSONObject json = cliente.getJson(path);
+            JSONObject json = cliente.getJson(CONTENT_PATH + path);
             int numPalabras = json.length();
             frases = new Frase[numPalabras];
 
@@ -85,6 +87,4 @@ public class Oraciones
         }
         return urls;
     }
-
-
 }

@@ -19,7 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import leeme.tta.intel.ehu.eus.leeme.R;
 
-public class CustomList extends ArrayAdapter<String> implements Resizeable
+public class CustomList extends ArrayAdapter<String>
 {
     private final String SERVER_URL = "http://51.254.127.111/Leeme";
 
@@ -46,33 +46,4 @@ public class CustomList extends ArrayAdapter<String> implements Resizeable
         return listRow;
     }
 
-    @Override
-    public void imageResize() {
-        //No need to implement here
-    }
-
-    @Override
-    public void imageResize(int[] drawables, int[] ids, int newSize) {
-        //No need to implement here
-    }
-
-    @Override
-    public Bitmap bitmapResize(Bitmap bitmap, int newSize)
-    {
-        try
-        {
-            ImageResize image = new ImageResize(bitmap,newSize);
-            return image.getScaled();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

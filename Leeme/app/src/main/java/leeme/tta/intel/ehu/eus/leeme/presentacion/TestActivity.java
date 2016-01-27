@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -21,39 +20,34 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
-import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Locale;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Oraciones;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Vocabulario;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Frase;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.HttpClient;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Palabra;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
 public class TestActivity extends AppCompatActivity{
 
     private final String SERVER_URL = "http://51.254.127.111/Leeme";
-    private final String QUERY_VOCABULARIO = "vocabularioPorCategoria.php";
-    private final String QUERY_FRASES = "oracionesPorCategoria.php";
 
     private VideoView video;
     private EditText respuesta;
     private Button btnSiguiente, btnCorregir;
-    private TextView testHeader, respCorrecta;
-    private ImageView imgRespuesta;
+    private TextView testHeader, respCorrecta, txtCorrectas, txtIncorrectas;
+    private ImageView imgRespuesta, imgCorrectas, imgIncorrectas;
     private LinearLayout layoutTest;
 
     private int index;
-    private int testCont = 6;
+    private int testCont = 10;
     private int numCorrectas = 0;
     private int numIncorrectas = 0;
     private String urlParams = "";
-    private String listaPalabras[];
-    private String hitzZerrenda[];
-    private String urlVideos[];
-    private String urlBideoak[];
-    private String listaUrls[];
+    private String cadenas[];
+    private String urls[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +78,21 @@ public class TestActivity extends AppCompatActivity{
                 urlParams += "&subc=" + submenu;
             }
         }
-        //Se deberia coger la categoria y subcategoria
         layoutTest = (LinearLayout)findViewById(R.id.test_linearlayout_test);
+        video = (VideoView)findViewById(R.id.test_videoview_video);
+        MediaController controller = new MediaController(this);
+        controller.setAnchorView(video);
+        video.setMediaController(controller);
+        respuesta = (EditText)findViewById(R.id.test_edittext_respuesta);
+        btnSiguiente = (Button)findViewById(R.id.test_button_siguiente);
+        btnCorregir = (Button)findViewById(R.id.test_button_corregir);
+        testHeader = (TextView)findViewById(R.id.test_textview_numtest);
+        respCorrecta = (TextView)findViewById(R.id.test_textview_respcorrecta);
+        imgRespuesta = (ImageView)findViewById(R.id.test_imageview_respuesta);
+        txtCorrectas = (TextView)findViewById(R.id.test_textview_correctas);
+        txtIncorrectas = (TextView)findViewById(R.id.test_textview_incorrectas);
+        imgCorrectas = (ImageView)findViewById(R.id.test_imageview_correctas);
+        imgIncorrectas = (ImageView)findViewById(R.id.test_imageview_incorrectas);
     }
 
     public void seleccionarTipo(View view)
@@ -95,31 +102,20 @@ public class TestActivity extends AppCompatActivity{
         View buttonView = findViewById(selectedId);
         index = grupo.indexOfChild(buttonView);
 
-        //Creamos el contenido
-        testHeader = new TextView(this);
-        int i = testCont + 1;
-        testHeader.setText(i + getString(R.string.test_text_numtest));
-        testHeader.setTextSize(16);
-        testHeader.setGravity(Gravity.CENTER_HORIZONTAL);
-        layoutTest.addView(testHeader);
-        video = new VideoView(this);
-        MediaController controller = new MediaController(this);
-        video.setMediaController(controller);
-        layoutTest.addView(video);
-        respuesta = new EditText(this);
-        layoutTest.addView(respuesta);
-        btnCorregir = new Button(this);
-        btnCorregir.setText(R.string.test_text_botoncorregir);
-        btnCorregir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                corregirTest(v);
-            }
-        });
-        layoutTest.addView(btnCorregir);
+        //Cambiamos la visibilidad
+        LinearLayout mainLayout = (LinearLayout)findViewById(R.id.test_linearlayout);
+        mainLayout.removeView(findViewById(R.id.test_linearlayout_escoger));
 
-        LinearLayout layoutPuntuacion = createScore();
-        layoutTest.addView(layoutPuntuacion);
+        testHeader.setText(testCont + getString(R.string.test_text_numtest));
+        txtCorrectas.setText(String.valueOf(numCorrectas));
+        txtIncorrectas.setText((String.valueOf(numIncorrectas)));
+        //
+        //imgCorrectas.setImageBitmap(Utils.bitmapResize());
+        //imgIncorrectas;
+        layoutTest.setVisibility(View.VISIBLE);
+
+        //LinearLayout layoutPuntuacion = createScore();
+        //layoutTest.addView(layoutPuntuacion);
         loadContent();
 
     }
@@ -137,17 +133,8 @@ public class TestActivity extends AppCompatActivity{
                 siguienteTest(v);
             }
         });
-        String listaContenido[];
-        if(Locale.getDefault().getDisplayLanguage().contains("esp"))
-        {
-            listaContenido = listaPalabras;
-        }
-        else
-        {
-            listaContenido = hitzZerrenda;
-        }
 
-        if(resp.equalsIgnoreCase(listaContenido[testCont]))
+        if(resp.equalsIgnoreCase(cadenas[testCont]))
         {
             //Respuesta correcta
             numCorrectas++;
@@ -167,7 +154,7 @@ public class TestActivity extends AppCompatActivity{
             imgRespuesta.setImageBitmap(Utils.bitmapResize(bm, 500));
             bm.recycle();
             respCorrecta = new TextView(this);
-            respCorrecta.setText(R.string.test_text_wascorrectanswer + listaContenido[testCont]);
+            respCorrecta.setText(R.string.test_text_wascorrectanswer + cadenas[testCont]);
             layoutTest.addView(imgRespuesta);
             layoutTest.addView(respCorrecta);
             layoutTest.addView(btnSiguiente);
@@ -199,16 +186,7 @@ public class TestActivity extends AppCompatActivity{
         });
         layoutTest.addView(btnCorregir);
 
-        /*if(index == 0)
-        {
-            video.setVideoURI(Uri.parse(SERVER_URL + listaUrls[testCont]));
-        }
-        else
-        {
-            video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
-        }*/
-
-        video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
+        video.setVideoURI(Uri.parse(SERVER_URL + '/' + urls[testCont]));
 
 
         LinearLayout layoutPuntuacion = createScore();
@@ -218,97 +196,42 @@ public class TestActivity extends AppCompatActivity{
     public void loadContent()
     {
         final String urlPeticion;
-        if(index == 0)
-        {
-            urlPeticion = SERVER_URL + '/' + QUERY_VOCABULARIO + urlParams;;
-        }
-        else
-        {
-            urlPeticion = SERVER_URL + '/' + QUERY_FRASES + urlParams;
-        }
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-            try
-            {
-                URL url = new URL(urlPeticion);
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                int code = conn.getResponseCode();
-                if(code == 200)
+                try
                 {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    JSONObject json = new JSONObject(br.readLine());
-                    int numPalabras = json.length();
-                    listaPalabras = new String[numPalabras];
-                    hitzZerrenda = new String[numPalabras];
-                    urlVideos = new String [numPalabras];
-                    urlBideoak = new String[numPalabras];
-
-                    for(int i = 0; i < numPalabras; i++)
+                    if(index == 0)
                     {
-                        int indice = i + 1;
-                        JSONObject palabra = json.getJSONObject( String.valueOf(indice));
-                        String cast, eusk;
-                        if(index == 0)
-                        {
-                            cast = palabra.getString("palabra");
-                            eusk = palabra.getString("hitza");
-                        }
-                        else
-                        {
-                            cast = palabra.getString("oracion");
-                            eusk = palabra.getString("esaldia");
-                        }
-
-                        String vid = palabra.getString("video");
-                        String bid = palabra.getString("bideoa");
-
-                        listaPalabras[i] = cast;
-                        hitzZerrenda[i] = eusk;
-                        urlVideos[i] = vid;
-                        urlBideoak[i] = bid;
-                    }
-
-                    if(Locale.getDefault().getDisplayLanguage().contains("esp"))
-                    {
-                        listaUrls = urlVideos;
+                        Vocabulario business = new Vocabulario(new HttpClient(SERVER_URL));
+                        Palabra[] palabras = business.getPalabrasByCategory(urlParams);
+                        cadenas = business.getPalabrasStrings(palabras, Utils.getCurrentLenguage());
+                        urls = business.getVideoUrls(palabras, Utils.getCurrentLenguage());
                     }
                     else
                     {
-                        listaUrls = urlBideoak;
+                        Oraciones business = new Oraciones(new HttpClient(SERVER_URL));
+                        Frase[] frases = business.getFrasesByCategory(urlParams);
+                        cadenas = business.getFrasesStrings(frases, Utils.getCurrentLenguage());
+                        urls = business.getVideoUrls(frases, Utils.getCurrentLenguage());
                     }
-                    video.post(new Runnable() {
+
+                    video.post(new Runnable()
+                    {
                         @Override
-                        public void run() {
-                            /*if(index == 0)
-                            {
-                                video.setVideoURI(Uri.parse(SERVER_URL + listaUrls[testCont]));
-                            }
-                            else
-                            {
-                                video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
-                            }*/
-                            video.setVideoURI(Uri.parse(SERVER_URL + '/' + listaUrls[testCont]));
+                        public void run()
+                        {
+                            video.setVideoURI(Uri.parse(SERVER_URL + '/' + urls[testCont]));
                         }
                     });
                 }
-                else
+                catch(Exception e)
                 {
-                    Toast.makeText(TestActivity.this, "No se ha podido comunicar con el servidor", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            }
         }).start();
-        LinearLayout linearMain = (LinearLayout)findViewById(R.id.test_linearlayout);
-        LinearLayout linearEscoger = (LinearLayout)findViewById(R.id.test_linearlayout_escoger);
-        LinearLayout linearTest = (LinearLayout)findViewById(R.id.test_linearlayout_test);
-        linearMain.removeView(linearEscoger);
-        linearTest.setVisibility(View.VISIBLE);
     }
 
     public LinearLayout createScore()

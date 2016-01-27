@@ -1,6 +1,7 @@
 package leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
@@ -10,21 +11,33 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import leeme.tta.intel.ehu.eus.leeme.R;
+
 public class Utils
 {
+    public final static int PANELSCALE=460;
+
     public void imageResize() {
         //No need to implement here
     }
 
-    public void imageResize(int[] drawables, int[] ids, int newSize) {
-
-    }
-
-    public void imageResize(int[] drawables, ImageView[] views, int newSize, Context contexto) {
+    public static void imageResize(int[] drawables, ImageView[] views, int[] newSizes, Resources contexto) {
         try {
             for(int i=0;i<drawables.length;i++) {
-                ImageResize image = new ImageResize(contexto.getResources(),drawables[i],newSize);
-                views[i].setBackground(new BitmapDrawable(contexto.getResources(),image.getScaled()));
+                ImageResize image = new ImageResize(contexto,drawables[i],newSizes[i]);
+                views[i].setBackground(new BitmapDrawable(contexto,image.getScaled()));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void imageResize(int[] drawables, ImageView[] views, int newSize, Resources contexto) {
+        try {
+            for(int i=0;i<drawables.length;i++) {
+                ImageResize image = new ImageResize(contexto,drawables[i],newSize);
+                views[i].setBackground(new BitmapDrawable(contexto,image.getScaled()));
             }
 
         } catch (IOException e) {

@@ -26,8 +26,12 @@ import java.util.Locale;
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Resizeable;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
-public class MainActivity extends AppCompatActivity implements Resizeable {
+public class MainActivity extends AppCompatActivity {
+
+    private ImageView[] panels;
+    private int[] drawables;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements Resizeable {
         else if(display.getRotation()== Surface.ROTATION_270 || display.getRotation()== Surface.ROTATION_90)
             setContentView(R.layout.activity_main_horizontal);
 
-        imageResize();
+        int[] newSizes = {300,300,150,150}; //logo, leeme, icono español, icono euskera
+        getPanels("Nothing needed here, just passing time XD");
+        Utils.imageResize(drawables,panels,newSizes,getResources());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,6 +94,17 @@ public class MainActivity extends AppCompatActivity implements Resizeable {
         return super.onKeyDown(keyCode, event);
     }
 
+    public void getPanels(String menu)
+    {
+        drawables=null;
+        panels=null;
+
+        int[] drawables = {R.drawable.icon, R.drawable.leeme_sin, R.drawable.spain, R.drawable.ikurrina};
+        this.drawables = drawables;
+        ImageView[] panels = {(ImageView) findViewById(R.id.main_image_logo), (ImageView) findViewById(R.id.main_image_leeme), (ImageView) findViewById(R.id.main_image_español), (ImageView) findViewById(R.id.main_image_euskera)};
+        this.panels = panels;
+    }
+
 
     @Override
     public void onBackPressed()
@@ -95,35 +112,6 @@ public class MainActivity extends AppCompatActivity implements Resizeable {
         finish();
     }
 
-    @Override
-    public void imageResize(int[] drawables, int[] ids, int newSize) {
-
-    }
-
-    @Override
-    public Bitmap bitmapResize(Bitmap bitmap, int newSize) {
-        return null;
-    }
-
-    @Override
-    public void imageResize() {
-        try {
-            ImageResize resizeLogo= new ImageResize(getResources(),R.drawable.icon,300);
-            ImageResize resizeLeeme = new ImageResize(getResources(),R.drawable.leeme_sin,300);
-            ImageResize resizeSpain = new ImageResize(getResources(),R.drawable.spain,150);
-            ImageResize resizeEuskera = new ImageResize(getResources(),R.drawable.ikurrina,165);
-            ImageView logo = (ImageView)findViewById(R.id.main_image_logo);
-            ImageView leeme = (ImageView)findViewById(R.id.main_image_leeme);
-            ImageView spain = (ImageView)findViewById(R.id.main_image_español);
-            ImageView euskera = (ImageView)findViewById(R.id.main_image_euskera);
-            logo.setImageBitmap(resizeLogo.getScaled());
-            leeme.setImageBitmap(resizeLeeme.getScaled());
-            spain.setImageBitmap(resizeSpain.getScaled());
-            euskera.setImageBitmap(resizeEuskera.getScaled());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {

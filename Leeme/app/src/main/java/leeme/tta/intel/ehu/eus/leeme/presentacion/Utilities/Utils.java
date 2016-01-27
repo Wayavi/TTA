@@ -13,17 +13,20 @@ public class Utils
         //No need to implement here
     }
 
-    public void imageResize(int[] drawables, int[] ids, int newSize, Context contexto) {
-        /*try {
-            for(int i=0;i<ids.length;i++) {
+    public void imageResize(int[] drawables, int[] ids, int newSize) {
+
+    }
+
+    public void imageResize(int[] drawables, ImageView[] views, int newSize, Context contexto) {
+        try {
+            for(int i=0;i<drawables.length;i++) {
                 ImageResize image = new ImageResize(contexto.getResources(),drawables[i],newSize);
-                ImageView view = (ImageView)contexto.findViewById(ids[i]);
-                view.setBackground(new BitmapDrawable(contexto.getResources(),image.getScaled()));
+                views[i].setBackground(new BitmapDrawable(contexto.getResources(),image.getScaled()));
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     public static Bitmap bitmapResize(Bitmap bitmap, int newSize) {

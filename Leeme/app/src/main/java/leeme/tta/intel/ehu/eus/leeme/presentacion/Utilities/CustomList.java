@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import leeme.tta.intel.ehu.eus.leeme.R;
 
 public class CustomList extends ArrayAdapter<String> implements Resizeable
@@ -26,14 +25,12 @@ public class CustomList extends ArrayAdapter<String> implements Resizeable
 
     private final Activity context;
     private final String[] cadenas;
-    private final String[] urlImagenes;
 
-    public CustomList(Activity context, String[] cadenas, String urls[])
+    public CustomList(Activity context, String[] cadenas)
     {
         super(context, R.layout.listitem, cadenas);
         this.context = context;
         this.cadenas = cadenas;
-        this.urlImagenes = urls;
     }
 
     @Override
@@ -45,57 +42,6 @@ public class CustomList extends ArrayAdapter<String> implements Resizeable
         final TextView texto = (TextView)listRow.findViewById(R.id.listitem_txt);
         texto.setText(cadenas[position]);
         img.setImageResource(R.drawable.icon);
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-<<<<<<< HEAD
-                String path = SERVER_URL + '/' + urlImagenes[position];
-                try
-                {
-                    URL url = new URL(path);
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    int code = conn.getResponseCode();
-                    if(code == 200)
-                    {
-                        InputStream is = conn.getInputStream();
-                        final Bitmap bitmap = BitmapFactory.decodeStream(is);
-
-                        //TODO: falta aplicar el resize al bitmap para que la app no pete por falta de memoria en la carga de imagen
-                        img.setImageBitmap(bitmap);
-                    }
-                }
-                catch(Exception e)
-=======
-            String path = SERVER_URL + '/' + urlImagenes[1];
-            try
-            {
-                URL url = new URL(path);
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                int code = conn.getResponseCode();
-                if(code == 200)
->>>>>>> 9afe3659be9eaf5195703fb12303be2a1e7fb74e
-                {
-                    InputStream is = conn.getInputStream();
-                    //TODO: falta aplicar el resize al bitmap para que la app no pete por falta de memoria en la carga de imagen
-                    final Bitmap bitmap = bitmapResize(BitmapFactory.decodeStream(is), 10);
-                    img.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            img.setImageBitmap(bitmap);
-                        }
-                    });
-                    //img.setImageDrawable(Drawable.createFromStream(is, "img"));
-                    bitmap.recycle();
-                }
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            }
-        }).start();*/
-        //img.setImageURI(Uri.parse(urlImagenes[position]));
-        //img.setImageResource(R.drawable.icon);
 
         return listRow;
     }

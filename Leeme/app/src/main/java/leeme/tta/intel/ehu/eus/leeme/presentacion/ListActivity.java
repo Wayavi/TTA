@@ -19,7 +19,11 @@ import java.net.URL;
 import java.util.Locale;
 
 import leeme.tta.intel.ehu.eus.leeme.R;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Business.Oraciones;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.CustomList;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Frase;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.HttpClient;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Palabra;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -29,11 +33,8 @@ public class ListActivity extends AppCompatActivity {
     private final String SERVER_URL = "http://51.254.127.111/Leeme/";
     private String urlParams;
 
-    private String listaPalabras[];
-    private String hitzZerrenda[];
-    private String urlImagenes[];
-    private String urlVideos[];
-    private String urlBideoak[];
+    private Frase[] frases;
+    private Palabra[] palabras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,33 +59,54 @@ public class ListActivity extends AppCompatActivity {
         String submenu = intent.getStringExtra("EXTRA_SUBMENU");
         String tipo = intent.getStringExtra("EXTRA_TIPO");
         urlParams = "";
-        final int type;
         if(tipo.equalsIgnoreCase("vocabulario"))
         {
-            urlParams += "/vocabularioPorCategoria.php";
-            type = 1;
+            urlParams += "vocabularioPorCategoria.php";
         }
         else
         {
-            urlParams += "/oracionesPorCategoria.php";
-            type = 2;
+            urlParams += "oracionesPorCategoria.php";
         }
 
         if(menu != null)
         {
             urlParams += "?cat=" + menu;
+            if(submenu != null && submenu != "")
+            {
+                urlParams += "&subc=" + submenu;
+            }
         }
-        if(submenu != null && submenu != "")
-        {
-            urlParams += "&subc=" + submenu;
-        }
+
+
+        final String idioma = "esp";
 
         new Thread(new Runnable() {
             @Override
             public void run() {
             try
             {
-                String peticion = SERVER_URL + urlParams;
+                Oraciones business = new Oraciones(new HttpClient(SERVER_URL));
+                frases = business.getFrasesByCategory(urlParams);
+                String cadenas[] = business.getFrasesStrings(frases, idioma);
+
+                final CustomList adaptador = new CustomList(ListActivity.this, cadenas);
+                lista.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        lista.setAdapter(adaptador);
+                    }
+                });
+                lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(ListActivity.this, LearnActivity.class);
+                        intent.putExtra(EXTRA_DISPLAY, listaContenido[position]);
+                        intent.putExtra(EXTRA_VIDEO, listaUrls[position]);
+                        startActivity(intent);
+                    }
+                });
+                /*
                 URL url = new URL(peticion);
                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                 int code = conn.getResponseCode();
@@ -102,7 +124,7 @@ public class ListActivity extends AppCompatActivity {
                     for(int i = 0; i < numPalabras; i++)
                     {
                         int index = i + 1;
-                        JSONObject palabra = json.getJSONObject( String.valueOf(index));
+                        JSONObject palabra = json.getJSONObject(String.valueOf(index));
                         String cast;
                         String eusk;
                         String img = "";
@@ -163,6 +185,7 @@ public class ListActivity extends AppCompatActivity {
                 {
                     Toast.makeText(ListActivity.this, "No se ha podido comunicar con el servidor", Toast.LENGTH_SHORT).show();
                 }
+                */
             }
             catch(Exception e)
             {

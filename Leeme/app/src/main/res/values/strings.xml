@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Leeme</string>
+    <string name="app_name">Bienvenido</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
 
@@ -7,7 +7,7 @@
     <string name="main_button_start">Comenzar</string>
 
     <!-- Strings para el menu activity-->
-    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_menu">Escoge un esecenario</string>
     <string name="menu_text_casa">CASA</string>
     <string name="menu_text_colegio">COLEGIO</string>
     <string name="menu_text_parque">PARQUE</string>
@@ -44,9 +44,9 @@
     <string name="colegio">Colegio</string>
     <string name="ayuda">¡Gracias por utilizar Leeme!\nAprende fácilmente a leer los labios</string>
 
-    <string name="title_activity_menu2">Menu</string>
-    <string name="title_activity_list">ListActivity</string>
-    <string name="title_activity_learn">LearnActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_menu2">Observa pronunciaciones o ponte a prueba con los ejercicios!</string>
+    <string name="title_activity_list">Selecciona la frase o palabra</string>
+    <string name="title_activity_learn">Observa tranquilamente como se pronuncia</string>
+    <string name="title_activity_test">¡Buena suerte!</string>
 
 </resources>

@@ -22,15 +22,20 @@ import java.io.IOException;
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Resizeable;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
 public class Menu2Activity extends AppCompatActivity implements Resizeable {
+
+    private ImageView[] panels;
+    private int[] drawables;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu2);
 
-        imageResize();
+        getPanels("");
+        Utils.imageResize(drawables,panels, Utils.PANELSCALE,getResources());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -174,6 +179,17 @@ public class Menu2Activity extends AppCompatActivity implements Resizeable {
         intent.putExtra("EXTRA_SUBMENU", intentSubmenu);
         intent.putExtra("EXTRA_TIPO", tipo);
         return intent;
+    }
+
+    public void getPanels(String menu)
+    {
+        drawables=null;
+        panels=null;
+
+        int[] drawables = {R.drawable.vocabulario, R.drawable.oraciones, R.drawable.ejercicios};
+        this.drawables = drawables;
+        ImageView[] panels = {(ImageView) findViewById(R.id.menu2_imagebutton_vocabulario), (ImageView) findViewById(R.id.menu2_imagebutton_oraciones), (ImageView) findViewById(R.id.menu2_imagebutton_ejercicios)};
+        this.panels = panels;
     }
 
     @Override

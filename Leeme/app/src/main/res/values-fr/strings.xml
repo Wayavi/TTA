@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Leeme</string>
+    <string name="app_name">Ongi etorri</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
 
@@ -8,7 +8,7 @@
     <string name="main_button_start">Sartu</string>
 
     <!-- Strings para el menu activity-->
-    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_menu">Lekua aukeratu</string>
     <string name="menu_text_casa">ETXEA</string>
     <string name="menu_text_colegio">ESKOLA</string>
     <string name="menu_text_parque">PARKEA</string>
@@ -45,8 +45,8 @@
     <string name="colegio">Eskola</string>
     <string name="ayuda">¡Eskerrikasko Leeme aukeratzeagatik!\nEspainak irakurtzen ikas esazu modu errasean</string>
 
-    <string name="title_activity_menu2">Menu</string>
-    <string name="title_activity_list">Listing</string>
-    <string name="title_activity_learn">Learning</string>
-    <string name="title_activity_test">Test</string>
+    <string name="title_activity_menu2">Ahozkerak ikusi edo saiatu ariketekin!</string>
+    <string name="title_activity_list">Aukeratu hitz edo esaldia</string>
+    <string name="title_activity_learn">Ikustazu lasai nola ahoskatzen den</string>
+    <string name="title_activity_test">Sorte on!</string>
 </resources>

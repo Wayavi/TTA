@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         this.getApplicationContext().getResources().updateConfiguration(config, null);
 
         Intent intent = getIntent();
-        finish();
         startActivity(intent);
     }
 

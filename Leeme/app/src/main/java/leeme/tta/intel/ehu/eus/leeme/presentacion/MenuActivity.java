@@ -22,12 +22,16 @@ import java.io.IOException;
 import leeme.tta.intel.ehu.eus.leeme.R;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.ImageResize;
 import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Resizeable;
+import leeme.tta.intel.ehu.eus.leeme.presentacion.Utilities.Utils;
 
 public class MenuActivity extends AppCompatActivity implements Resizeable {
 
     private String menu;
     private String subMenu;
     private Display display;
+
+    private ImageView[] panels;
+    private int[] drawables;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MenuActivity extends AppCompatActivity implements Resizeable {
         display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 
         layoutCreate(savedInstanceState);
+        Utils.imageResize(drawables, panels, Utils.PANELSCALE,getResources());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
